@@ -10,7 +10,8 @@ angular.module('caseCompApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'partials/main',
-        controller: 'MainCtrl'
+        controller: 'MainCtrl',
+        authenticate: true
       })
       .when('/login', {
         templateUrl: 'partials/login',
@@ -25,6 +26,35 @@ angular.module('caseCompApp', [
         controller: 'SettingsCtrl',
         authenticate: true
       })
+      
+      
+      .when('/dashboard', {
+          redirectTo: '/',
+          authenticate: true
+      })
+      
+      .when('/analytics', {
+          templateUrl: 'partials/analytics',
+          controller: 'analyticsController',
+          authenticate: true
+      })
+      .when('/jobs', {
+          templateUrl: 'partials/jobs',
+          controller: 'jobsController',
+          authenticate: true
+      })
+      .when('/events', {
+          templateUrl: 'partials/events',
+          controller: 'eventsController',
+          authenticate: true
+      })
+      .when('/candidates', {
+          templateUrl: 'partials/candidates',
+          controller: 'candidatesController',
+          authenticate: true
+      })
+      
+      
       .otherwise({
         redirectTo: '/'
       });
