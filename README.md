@@ -1,4 +1,4 @@
 case-comp
 =========
 
-Case Comp App
+Case Comp App.
