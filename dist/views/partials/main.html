@@ -1,21 +1,83 @@
-<div ng-include="'partials/navbar'"></div>
-
-<div class="jumbotron">
-  <h1>'Allo, 'Allo <span ng-show="currentUser">{{ currentUser.name }}</span>!</h1>
-  <p class="lead">
-    <img src="images/47b431ed.yeoman.png" alt="I'm Yeoman"><br>
-    Always a pleasure scaffolding your apps.
-  </p>
-  <p><a class="btn btn-lg btn-success" ng-href="#">Splendid!</a></p>
+<div style="text-align: center; margin: 0px auto; margin-top: 20px" class="m20t">
+    <p class="lead">Welcome to RecruitMe (Blackwood Consulting Recruitment)</p>
 </div>
 
-<div class="row marketing">
-  <div ng-repeat="thing in awesomeThings">
-      <h4>{{thing.name}}</h4>
-      <p>{{thing.info}}</p>
-  </div>
-</div>
+<div class="row">
+    <div class="col-sm-4">
+        <h4>Applicants By University
+        <canvas id="UniApps" width="200" height="200" class="cv"></canvas>
+    </h4></div>
+    <div class="col-sm-4">
+        <h4>Offers By University
+        <canvas id="UniOffs" width="200" height="200" class="cv"></canvas>
+    </h4></div>
+    <div class="col-sm-4">
+        <h4>GPA By Major
+        <canvas id="MajorGPA" data-type="Bar" width="200" height="200" class="cv"></canvas>
+    </h4></div>
+</div> 
+        <!-- 
+<div id="dash-applicants">
+    <h2>Recent Candidates</h2>
+        <div class="row">
+            <div class="tile">
+                <div class="candidate-icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
 
-<div class="footer">
-  <p>♥ from the Yeoman team</p>
+            <div class="tile">
+                <div class="candidate-icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+
+            <div class="tile">
+                <div class="candidate-icon">
+                    <i class="fa fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div id="dash-events">
+    <h2>Recent Events</h2>
+    <div class="row">
+        <basic-tile type="'event'" text="'test Text'"></basic-tile>
+        <div class="tile">
+            <div class="event-icon">
+                <i class="fa fa-calendar"></i>
+            </div>
+        </div>
+        <div class="tile">
+            <div class="event-icon">
+                <i class="fa fa-calendar"></i>
+            </div>
+        </div>
+        <div class="tile">
+            <div class="event-icon">
+                <i class="fa fa-calendar"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dash-jobs">
+    <h2>Recent Jobs</h2>
+    <div class="row">
+        <div class="tile">
+            <div class="job-icon">
+                <i class="fa fa-suitcase"></i>
+            </div>
+        </div>
+        <div class="tile">
+            <div class="job-icon">
+                <i class="fa fa-suitcase"></i>
+            </div>
+        </div>
+        <div class="tile">
+            <div class="job-icon">
+                <i class="fa fa-suitcase"></i>
+            </div>
+        </div>
+    </div>
+</div>-->

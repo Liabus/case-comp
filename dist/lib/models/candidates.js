@@ -23,17 +23,15 @@ var CandidateSchema = new Schema({
     major: {type: String, required: true},
     GPA: {type: Number, required: true},
     address: {type: String, required: true},
+    phone: {type: String, required: true},
     
-    experience: [String],
-    skills: [String],
-    interests: [String],
-    
-    //On resume
-    resume: {type: String},
+    experience: String,
+    skills: String,
+    interests: String,
     
     interview: [{
         datetime: {type: Date, default: Date.now, required: true},
-        //interviewer: User,
+        interviewer: { type: Schema.Types.ObjectId, ref: 'User', required: false},
         type: {type: String, required: true},
         notes: {type: String}
     }]

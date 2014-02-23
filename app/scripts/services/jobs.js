@@ -18,7 +18,6 @@ angular.module('caseCompApp')
         get: {
             method: 'GET',
             params: {
-                id:'me'
             }
         }
 	  });

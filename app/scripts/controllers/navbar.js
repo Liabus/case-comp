@@ -2,22 +2,16 @@
 
 angular.module('caseCompApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth) {
-    $scope.menu = [{
-      'title': 'Home',
-      'link': '/'
-    }, {
-      'title': 'Settings',
-      'link': '/settings'
-    }];
-    
+      
     $scope.logout = function() {
-      Auth.logout()
-      .then(function() {
+        console.log('logging out');
+      Auth.logout().then(function() {
         $location.path('/login');
       });
     };
     
     $scope.isActive = function(route) {
-      return route === $location.path();
+      return route === $location.path().split('/')[1].toLowerCase();
     };
+    
   });

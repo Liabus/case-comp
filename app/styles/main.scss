@@ -1,89 +1,235 @@
 $icon-font-path: "/bower_components/sass-bootstrap/fonts/";
+/*
+ * Base structure
+ */
 
-.browsehappy {
-    margin: 0.2em 0;
-    background: #ccc;
-    color: #000;
-    padding: 0.2em 0;
-}
-
-/* Space out content a bit */
+/* Move down content because we have a fixed navbar that is 50px tall */
 body {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    font-family: 'Open Sans', sans-serif;
+  padding-top: 50px;
 }
 
-/* Everything but the jumbotron gets side spacing for mobile first views */
-.header,
-.marketing,
-.footer {
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar {
+    background-color: rgb(42,42,42);
 }
 
-/* Custom page header */
-.header {
-    border-bottom: 1px solid #e5e5e5;
+.m20t {
+    margin-top: 20px;
+}
+.m20b {
+    margin-bottom: 20px;
 }
 
-/* Make the masthead heading the same height as the navigation */
-.header h3 {
-    margin-top: 0;
-    margin-bottom: 0;
-    line-height: 40px;
-    padding-bottom: 19px;
-}
-
-/* Custom page footer */
-.footer {
-    padding-top: 19px;
-    color: #777;
-    border-top: 1px solid #e5e5e5;
-}
-
-.container-narrow > hr {
-    margin: 30px 0;
-}
-
-/* Main marketing message and sign up button */
-.jumbotron {
+.tile .lab {
+    color: #fff !important;
     text-align: center;
-    border-bottom: 1px solid #e5e5e5;
+    font-size: 16px;
+    padding-top: 12px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 10px;
 }
 
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: rgb(239,239,228);
+    border-right: 1px solid rgb(210,210,203);
+
+  }
 }
 
-/* Supporting marketing content */
-.marketing {
-    margin: 40px 0;
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 30px;
+  color: rgb(42,42,42);
+}
+.nav-sidebar > .active > a {
+  color: #fff;
+  background-color: rgb(214,74,77);
 }
 
-.marketing p + h4 {
-    margin-top: 28px;
+.nav-sidebar > .active > a:hover {
+  color: #fff !important;
+  background-color: rgb(214,74,77) !important;
 }
 
-/* Responsive: Portrait tablets and up */
-@media screen and (min-width: 768px) {
-    .container {
-        max-width: 730px;
-    }
-
-    /* Remove the padding we set earlier */
-    .header,
-    .marketing,
-    .footer {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    /* Space out the masthead */
-    .header {
-        margin-bottom: 30px;
-    }
-    /* Remove the bottom border on the jumbotron for visual effect */
-    .jumbotron {
-        border-bottom: 0;
-    }
+.nav-sidebar a:hover {
+    background-color: #ffffff !important;
 }
+
+.sidebar-nav-item {
+    font-size: 1.2em;
+    border-bottom: 1px solid rgb(220,220,209);
+}
+
+
+
+
+
+
+
+
+
+
+
+.tile {
+	display: inline-block;
+	margin: 10px;
+	width: 200px;
+	height: 200px;
+	padding-top: 20px;
+	background-color: rgb(214,74,77);
+	box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.4);
+    border: 1px solid #A83538;
+}
+
+.job-icon {
+	width: 100px;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+	border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.job-icon i {
+	margin-top: 28px;
+	font-size: 3em;
+	color: rgb(42,42,42);
+}
+
+.event-icon {
+	width: 100px;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+	border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.event-icon i {
+	margin-top: 28px;
+	font-size: 3em;
+	color: rgb(42,42,42);
+}
+
+.candidate-icon {
+	width: 100px;
+    height: 100px;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: white;
+	border: 1px solid black;
+    border-radius: 50%;
+    text-align: center;
+}
+
+.candidate-icon i {
+	margin-top: 28px;
+	font-size: 3em;
+	color: rgb(42,42,42);
+}
+
+
+.cv {
+    margin: 0px auto;
+    display: inline-block;
+    text-align:center;
+}
+
+
+
+
+
+#jobs-top {
+	height: 80px;
+	width: 100%;
+}
+
+.job-description {
+	background-color: white;
+	border: 1px solid #424242;
+    margin-bottom: 10px;
+}
+
+.descript-header {
+	color: white;
+	width: 100%;
+	height: 35px;
+	padding-top: 7px;
+	padding-left: 20px;
+	background-color: rgb(42,42,42);
+}
+
+.descript-header .btn {
+	float: right;
+	color: rgb(130,130,130);
+	background-color: rgb(42,42,42);
+	border: 1px solid rgb(130,130,130);
+	padding-top: 1px;
+	padding-bottom: 2px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-top: -32px;
+	margin-right: 20px;
+}
+
+.descript-row {
+	width: 100%;
+	padding-top: 10px;
+	padding-left: 7px;
+	padding-right: 5px;
+    margin-bottom: 10px;
+	min-height: 40px;
+	border-bottom: 1px solid #dfdfdf;
+}
+
+.desc-left {
+	font-weight: bold;
+	width: 25%;
+	float: left;
+}
+
+.desc-right {
+	width: 75%;
+	float: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.tile {
+	display: inline-block;
+	margin: 10px;
+	width: 200px;
+	height: 200px;
+	padding-top: 20px;
+	background-color: rgb(214,74,77);
+	box-shadow: 1px 1px 1px 1px #d2d2d2;
+}
+

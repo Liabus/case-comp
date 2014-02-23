@@ -1,0 +1,48 @@
+<div id="jobs-top">
+      <h1>{{um.name}}</h1>
+      <h5>{{um.location}}</h5>
+  </div>
+
+  <h3>Event Details</h3>
+<div class="tab-content">
+  <div class="tab-pane active" id="tab1">
+    <div class="job-description">
+          <div class="descript-header">
+              <p>Description</p><p>
+              <a href="/events/edit/{{um._id}}" class="btn">Edit</a>
+          </p></div>
+          <div class="descript-content">
+              <div class="descript-row clearfix">
+                  <div class="desc-left">Name</div>
+                  <div class="desc-right">{{um.name}}</div>
+              </div>
+              
+              <div class="descript-row clearfix">
+                  <div class="desc-left">type</div>
+                  <div class="desc-right">{{um.type}}</div>
+              </div>
+              
+              <div class="descript-row clearfix">
+                  <div class="desc-left">Date</div>
+                  <div class="desc-right">{{um.datetime}}</div>
+              </div>
+              <div class="descript-row clearfix">
+                  <div class="desc-left">Location</div>
+                  <div class="desc-right">{{um.location}}</div>
+              </div>
+          </div>
+      </div>
+  </div>
+  
+  <a style="margin-top: 17px" href="/events/view/{{um._id}}/attendee" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add Attendee</a>
+  
+ <h3>Attendees</h3>
+ <div class="m20b">
+     
+     <div class="job-description m20t" ng-repeat="int in um.attendees">
+         <div class="descript-header">
+           <p>{{int.name}}</p>
+       </div>
+     </div>
+     
+ </div></div>

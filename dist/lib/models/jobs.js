@@ -15,7 +15,7 @@ var JobSchema = new Schema({
     salary: Number,
     description: String,
     
-    //applicants: [Candidates],
+    applicants: [{ type: Schema.Types.ObjectId, ref: 'Candidates' }],
     offers: [{
         datetime: {type: Date, default: Date.now}
     }]

@@ -7,15 +7,13 @@ var mongoose = require('mongoose'),
  * Thing Schema
  */
 var EventSchema = new Schema({
-    name: String,
-    info: String,
-    location: String,
-    type: String,
-    datetime: Date,
+    name: {type: String, required: true},
+    location: {type: String, required: true},
+    type: {type: String},
+    datetime: {type: Date, default: Date.now},
     
     //Associations:
-    //hosts: Users,
-    //attendees: Candidates
+    attendees: [{ name: '' }]
 });
 
 mongoose.model('Events', EventSchema);

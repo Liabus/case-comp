@@ -8,7 +8,12 @@ angular.module('caseCompApp', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
+    
       .when('/', {
+          redirectTo: '/dashboard',
+          authenticate: true
+      })
+      .when('/dashboard', {
         templateUrl: 'partials/main',
         controller: 'MainCtrl',
         authenticate: true
@@ -27,36 +32,88 @@ angular.module('caseCompApp', [
         authenticate: true
       })
       
-      
-      .when('/dashboard', {
-          redirectTo: '/',
-          authenticate: true
-      })
-      
       .when('/analytics', {
           templateUrl: 'partials/analytics',
           controller: 'analyticsController',
           authenticate: true
       })
+      
       .when('/jobs', {
           templateUrl: 'partials/jobs',
           controller: 'jobsController',
           authenticate: true
       })
+      .when('/jobs/view/:id', {
+          templateUrl: 'partials/viewJob',
+          controller: 'jobsController',
+          authenticate: true
+      })
+      .when('/jobs/add', {
+          templateUrl: 'partials/addJob',
+          controller: 'jobsController',
+          authenticate: true
+      })
+      .when('/jobs/edit/:id', {
+          templateUrl: 'partials/addJob',
+          controller: 'jobsController',
+          authenticate: true
+      })
+      
       .when('/events', {
           templateUrl: 'partials/events',
           controller: 'eventsController',
           authenticate: true
       })
+      .when('/events/view/:id', {
+          templateUrl: 'partials/viewEvent',
+          controller: 'eventsController',
+          authenticate: true
+      })
+      .when('/events/add', {
+          templateUrl: 'partials/addEvent',
+          controller: 'eventsController',
+          authenticate: true
+      })
+      .when('/events/edit/:id', {
+          templateUrl: 'partials/addEvent',
+          controller: 'eventsController',
+          authenticate: true
+      })
+      .when('/events/view/:id/attendee', {
+          templateUrl: 'partials/addAttendee',
+          controller: 'eventsController',
+          authenticate: true
+      })
+      
       .when('/candidates', {
           templateUrl: 'partials/candidates',
+          controller: 'candidatesController',
+          authenticate: true
+      })
+      .when('/candidates/view/:id', {
+          templateUrl: 'partials/viewCandidate',
+          controller: 'candidatesController',
+          authenticate: true
+      })
+      .when('/candidates/add', {
+          templateUrl: 'partials/addCandidate',
+          controller: 'candidatesController',
+          authenticate: true
+      })
+      .when('/candidates/edit/:id', {
+          templateUrl: 'partials/addCandidate',
+          controller: 'candidatesController',
+          authenticate: true
+      })
+      .when('/candidates/view/:id/interview', {
+          templateUrl: 'partials/addInterview',
           controller: 'candidatesController',
           authenticate: true
       })
       
       
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/dashboard'
       });
       
     $locationProvider.html5Mode(true);
