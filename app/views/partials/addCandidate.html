@@ -1,61 +1,66 @@
-<div class="m20b">
-    <h1>{{addCandidatesLabel()}}</h1>
-    <form class="form" name="form" ng-submit="addCandidate(form)">
+<div class="modal-header">
+    <button type="button" class="close pull-right" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h3>{{label()}}</h3>
+</div>
+<div class="modal-body">
+    <form novalidate class="form" name="form" ng-submit="add()">
         <div class="form-group">
             <label>First Name</label>
-            <input type="text" class="form-control" ng-model="um.firstName" required>
+            <input type="text" class="form-control" ng-model="model.firstName" required>
         </div>
 
         <div class="form-group">
             <label>Last Name</label>
-            <input type="text" class="form-control" ng-model="um.lastName" required>
+            <input type="text" class="form-control" ng-model="model.lastName" required>
         </div>
         
         <div class="form-group">
             <label>Email</label>
-            <input type="email" class="form-control" ng-model="um.email" required>
+            <input type="email" class="form-control" ng-model="model.email" required>
         </div>
         
         <div class="form-group">
             <label>Phone</label>
-            <input type="text" class="form-control" ng-model="um.phone" required>
+            <input type="tel" class="form-control mask-phone" ng-model="model.phone" required>
         </div>
         
         <div class="form-group">
             <label>Address</label>
-            <textarea class="form-control" ng-model="um.address" required></textarea>
+            <textarea class="form-control" ng-model="model.address" required></textarea>
         </div>
         
         <div class="form-group">
             <label>University</label>
-            <input type="text" class="form-control" ng-model="um.university" required>
+            <input type="text" class="form-control" ng-model="model.university" required>
         </div>
         
         <div class="form-group">
             <label>Major</label>
-            <input type="text" class="form-control" ng-model="um.major" required>
+            <input type="text" class="form-control" ng-model="model.major" required>
         </div>
         
         <div class="form-group">
             <label>GPA</label>
-            <input type="text" class="form-control" ng-model="um.GPA" required>
+            <input type="text" class="form-control mask-decimal" ng-model="model.GPA" required>
         </div>
         
         <div class="form-group">
             <label>Experience</label>
-            <textarea class="form-control" ng-model="um.experience" required></textarea>
+            <textarea class="form-control" ng-model="model.experience"></textarea>
         </div>
         
         <div class="form-group">
             <label>Interests</label>
-            <textarea class="form-control" ng-model="um.interests" required></textarea>
+            <textarea class="form-control" ng-model="model.interests"></textarea>
         </div>
         
         <div class="form-group">
             <label>Skills</label>
-            <textarea class="form-control" ng-model="um.skills" required></textarea>
+            <textarea class="form-control" ng-model="model.skills"></textarea>
         </div>
-
-        <button type="submit" class="btn btn-lg btn-primary">{{addCandidatesLabel()}}</button>
     </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="add()" ng-disabled="form.$invalid">{{label()}}</button>
 </div>

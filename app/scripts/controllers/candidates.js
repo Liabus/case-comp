@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('caseCompApp')
-  .controller('candidatesController', function ($scope, Candidates, $location, $routeParams) {
+  .controller('candidatesController', function ($scope, Candidates, $location, $routeParams, $modal) {
       $scope.edit = false;
       $scope.candidates = [];
       $scope.um = {};
@@ -18,7 +18,18 @@ angular.module('caseCompApp')
       
       Candidates.list(function(jobs){
           $scope.candidates = jobs.candidates;
+          //Add name field for searching:
+          _.forEach($scope.candidates, function(el){
+              el.name = el.firstName + ' ' + el.lastName;
+          });
       });
+      
+      $scope.addClicked = function(){
+          $modal.open({
+              templateUrl: 'partials/addCandidate.html',
+              controller: 'ModalController'
+          });
+      }
       
       $scope.addCandidatesLabel = function(){
           if($scope.edit){

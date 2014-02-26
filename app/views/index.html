@@ -14,16 +14,17 @@
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
     <!-- build:css(app) styles/vendor.css -->
     <!-- bower:css -->
-    <link rel="stylesheet" href="bower_components/sass-bootstrap/dist/css/bootstrap.css" />
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.css" />
+    <link rel="stylesheet" href="bower_components/nprogress/nprogress.css" />
     <!-- endbuild -->
     
     <link href='http://fonts.googleapis.com/css?family=Pontano+Sans' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
   </head>
   <body ng-app="caseCompApp">
 
@@ -40,6 +41,16 @@
           <a class="navbar-brand" href="/">RecruitMe</a>
         </div>
         <div class="navbar-collapse collapse">
+            
+            <!-- Responsive Menu -->
+            <ul class="nav navbar-nav navbar-left visible-xs resp-nav">
+              <li><a href="/settings">Dashboard</a></li>
+              <li><a href="/candidates">Candidates</a></li>
+              <li><a href="/jobs">Jobs</a></li>
+              <li><a href="/events">Events</a></li>
+              <li><a href="/analytics">Analytics</a></li>
+            </ul>
+            
           <ul class="nav navbar-nav navbar-right">
             <li><a href="/settings">Settings</a></li>
             <li><a href="#" ng-click="logout()">Logout</a></li>
@@ -54,12 +65,11 @@
           
         <div class="col-sm-3 col-md-2 sidebar" ng-controller="NavbarCtrl">
           <ul class="nav nav-sidebar">
-            <li class="sidebar-nav-item"  ng-class="{active: isActive('dashboard')}" id="side-anal"><a href="/dashboard"><i class="fa fa-tasks"></i> Analytics</a></li>
+            <li class="sidebar-nav-item" ng-class="{active: isActive('dashboard')}"><a href="/dashboard"><i class="fa fa-tachometer" id="side-dashboard"></i> Dashboard</a></li>
             <li class="sidebar-nav-item"  ng-class="{active: isActive('jobs')}" id="side-jobs"><a href="/jobs"><i class="fa fa-suitcase"></i> Jobs</a></li>
             <li class="sidebar-nav-item"  ng-class="{active: isActive('candidates')}" id="side-candidates"><a href="/candidates"><i class="fa fa-users"></i> Candidates</a></li>
             <li class="sidebar-nav-item"  ng-class="{active: isActive('events')}" id="side-events"><a href="/events"><i class="fa fa-calendar"></i> Events</a></li>
-            <!-- <li class="sidebar-nav-item"  ng-class="{active: isActive('analytics')}" id="side-anal"><a href="/analytics"><i class="fa fa-tasks"></i> Analytics</a></li> -->
-            <!-- <li class="sidebar-nav-item" ng-class="{active: isActive('dashboard')}"><a href="/dashboard"><i class="fa fa-tachometer" id="side-dashboard"></i> Dashboard</a></li>-->
+            <li class="sidebar-nav-item"  ng-class="{active: isActive('analytics')}" id="side-anal"><a href="/analytics"><i class="fa fa-tasks"></i> Analytics</a></li>
           </ul>
         </div>
         
@@ -92,17 +102,23 @@
     <!-- bower:js -->
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-route/angular-route.js"></script>
     <script src="bower_components/fastclick/lib/fastclick.js"></script>
+    <script src="bower_components/nprogress/nprogress.js"></script>
+    <script src="bower_components/chartjs/Chart.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="bower_components/jquery.inputmask/dist/jquery.inputmask.bundle.js"></script>
+    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <!-- endbower -->
     
     <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        
         <script src="scripts/app.js"></script>
         
         <script src="scripts/controllers/main.js"></script>
@@ -116,6 +132,8 @@
         <script src="scripts/controllers/events.js"></script>
         <script src="scripts/controllers/jobs.js"></script>
         
+        <script src="scripts/controllers/modal.js"></script>
+        
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/session.js"></script>
         <script src="scripts/services/user.js"></script>
@@ -125,7 +143,7 @@
         
         <script src="scripts/directives/mongooseError.js"></script>
         <script src="scripts/directives/basicTile.js"></script>
-        <script src="scripts/directives/chart.js"></script>
+        <script src="scripts/directives/megaFilter.js"></script>
         <!-- endbuild -->
 </body>
 </html>

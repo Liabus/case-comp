@@ -1,14 +1,39 @@
-<div class="clearfix m20t">
-    <a href="/candidates/add" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add Candidate</a>
+<div class="page-header clearfix">
+    
+  <h4>Candidates</h4>
+  
+  <div class="header-controls pull-left">
+    <div class="input-group" style="max-width: 400px;">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Search By All <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a >Search By All</a></li>
+              <li><a >Search By Name</a></li>
+              <li><a >Search By University</a></li>
+              <li><a >Search By Major</a></li>
+              <li><a >Search By Minor</a></li>
+              <li><a >Search By GPA</a></li>
+              <li class="divider"></li>
+              <li><a >Clear Search</a></li>
+            </ul>
+        </div>
+        <input type="search" placeholder="Search Candidates..." class="form-control" ng-model="search"> 
+        <span class="input-group-btn">
+            <button class="btn btn-default" type="button">
+                <span class="glyphicon glyphicon-search"></span>
+            </button>
+        </span>
+    </div>
+  </div>
+  
+  <button ng-click="addClicked()" class="header-controls btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add Candidate</button>
+  
 </div>
 
-<div ng-repeat="candidate in candidates" class="pull-left">
-    <a href="/candidates/view/{{candidate._id}}">
-        <div class="tile">
-            <div class="candidate-icon">
-                <i class="fa fa-user"></i>
-            </div>
-            <div class="lab">{{candidate.firstName + ' ' + candidate.lastName}}</div>
-        </div>
-    </a>
+<div class="row">
+    <div ng-repeat="candidate in candidates | megaFilter: {'query': search, 'type': type}" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 basic-tile-list">
+        <a href="/candidates/view/{{candidate._id}}" class="basic-tile-parent">
+            <basic-tile header="candidate.firstName + ' ' + candidate.lastName" icon="'candidate'" details="'Super Cool Dude'"></basic-tile>
+        </a>
+    </div>
 </div>

@@ -30,6 +30,13 @@ angular.module('caseCompApp')
           return 'Add Events';
       }
       
+      $scope.openDate = function($event) {
+          $event.preventDefault();
+          $event.stopPropagation();
+
+          $scope.opened = true;
+        };
+      
       $scope.addAttendee = function(){
           $scope.udm._id = $scope.um._id;
           Events.attendee($scope.udm, function(){

@@ -9,23 +9,23 @@ angular.module('caseCompApp')
     return {
       restrict: 'AE',
       scope: {
-          type: '@',
-          text: '@'
+          'icon': '=',
+          'header': '=',
+          'details': '='
       },
       replace: true,
-      template: '<div class="tile"><div class="event-icon"><i class="fa" ng-class="linker()"></i> {{text}} </div></div>',
+      templateUrl: 'partials/basicTile.html',
       link: function(scope, element, attrs, ngModel) {
           var linker = {
               'event': 'calendar',
               'job': 'suitcase',
               'candidate': 'user'
           };
-          scope.linker = function(){
-              return 'fa-' + linker[scope.type];
-          }
-          scope.mainclass = function(){
-              return scope.type + '-icon';
-          }
+          
+          scope.$watch('icon', function(val, e, r, b){
+              scope.picon = 'fa-' + linker[scope.icon];
+              //scope.$apply();
+          });
       }
     };
   });
