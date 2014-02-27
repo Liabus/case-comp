@@ -15,7 +15,14 @@ angular.module('caseCompApp')
       },
       replace: true,
       templateUrl: 'partials/basicTile.html',
-      link: function(scope, element, attrs, ngModel) {
+      link: function(scope, elem, attrs, ngModel) {
+          
+          //Big plus icon:
+          if(attrs.mode && attrs.mode === 'add'){
+              elem.addClass('add');
+              elem.html('<span class="glyphicon glyphicon-plus"></span>');
+          }
+          
           var linker = {
               'event': 'calendar',
               'job': 'suitcase',

@@ -228,6 +228,14 @@ a {
     cursor: pointer;
 }
 
+.dropdown-toggle-none {
+    padding-right: 8px;
+    padding-left: 8px;
+    border-radius: 4px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
 /* Basic Tile */
 
 .basic-tile-parent {
@@ -244,6 +252,17 @@ a {
     padding: 20px;
     border: 1px solid transparent;
     display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    
+    height: 90px;
+    
+    &.add {
+        text-align: center;
+        line-height: 55px;
+        color: #fff;
+        font-size: 3em;
+    }
     
     .picture {
         color: #2A2A2A !important;

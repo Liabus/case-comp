@@ -4,6 +4,8 @@ angular.module('caseCompApp')
     .controller('ModalController', function ($scope, $routeParams, $location, $timeout, $modalInstance, Candidates, Events, Jobs) {
         $scope.model = {};
         
+        NProgress.done();
+        
         var slicer = {
             'candidates': Candidates,
             'events': Events,
