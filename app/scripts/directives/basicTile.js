@@ -29,6 +29,13 @@ angular.module('caseCompApp')
               'candidate': 'user'
           };
           
+          scope.deArray = function(det){
+              if(_.isArray(det)){
+                  return det.join(', ');
+              }
+              return det;
+          }
+          
           scope.$watch('icon', function(val, e, r, b){
               scope.picon = 'fa-' + linker[scope.icon];
               //scope.$apply();

@@ -7,7 +7,7 @@ angular.module('caseCompApp')
       $scope.um = {};
       $scope.udm = {};
       
-      $scope.sortMode = 'firstName';
+      $scope.sortMode = 'name';
       $scope.sortString = 'Name';
       //Does the opposite of what it sounds like:
       $scope.sortDesc = false;
@@ -42,15 +42,30 @@ angular.module('caseCompApp')
           }
       }
       
+      $scope.deArray = function(det, first){
+          if(_.isArray(det)){
+              if(first){
+                  return det[0];
+              }
+              return det.join(', ');
+          }
+          return det;
+      }
+      
       updateData();
       
       $scope.pickRelevant = function(candidate){
-          if($scope.sortMode.toLowerCase() === 'name' || $scope.sortMode.toLowerCase() === 'firstname'){
+          var sm = $scope.sortMode.toLowerCase();
+          if(sm === 'name' || sm === 'firstname') sm = '';
+          
+          var rel = sm || (candidate.matched || '').toLowerCase() || 'name';
+          
+          if(rel === 'name' || rel === 'firstname'){
               return candidate.university;
-          }else if($scope.sortMode.toLowerCase() === 'gpa'){
+          }else if(rel === 'gpa'){
               return (candidate.GPA + ' GPA') || candidate.university || '';
           }else{
-              return candidate[$scope.sortMode] || candidate.university || '';
+              return candidate[rel] || candidate.university || '';
           }
       }
       
