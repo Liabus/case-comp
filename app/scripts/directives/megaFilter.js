@@ -20,30 +20,35 @@ angular.module('caseCompApp')
             angular.forEach(items, function(item) {
                 if(type === 'name' || type === 'all'){
                     if(searchString(item.name, query)){
+                        item.matched = 'name';
                         filtered.push(item);
                         return;
                     }
                 }
                 if(type === 'university' || type === 'all'){
                     if(searchString(item.university, query)){
+                        item.matched = 'university';
                         filtered.push(item);
                         return;
                     }
                 }
                 if(type === 'major' || type === 'all'){
                     if(searchString(item.major, query)){
+                        item.matched = 'major';
                         filtered.push(item);
                         return;
                     }
                 }
                 if(type === 'minor' || type === 'all'){
                     if(searchString(item.major, query)){
+                        item.matched = 'minor';
                         filtered.push(item);
                         return;
                     }
                 }
                 if(type === 'gpa' || type === 'all'){
                     if(+query <= +item.GPA){
+                        item.matched = 'GPA';
                         filtered.push(item);
                         return;
                     }
