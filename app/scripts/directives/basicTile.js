@@ -20,7 +20,7 @@ angular.module('caseCompApp')
           //Big plus icon:
           if(attrs.mode && attrs.mode === 'add'){
               elem.addClass('add');
-              elem.html('<span class="glyphicon glyphicon-plus"></span>');
+              elem.html('<span class="fa fa-plus"></span>');
           }
           
           var linker = {

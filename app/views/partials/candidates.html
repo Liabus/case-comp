@@ -5,7 +5,7 @@
   <div class="header-controls pull-left">
     <div class="input-group" style="max-width: 400px;">
         <span class="input-group-addon">
-            <span class="glyphicon glyphicon-search"></span>
+            <span class="fa fa-search"></span>
         </span>
         <input type="search" placeholder="Search Candidates..." class="form-control" ng-model="search">
         <div class="input-group-btn">
@@ -48,13 +48,13 @@
 
 <div class="row">
     
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 basic-tile-list">
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
         <a class="basic-tile-parent" ng-click="addClicked()">
             <basic-tile mode="add"></basic-tile>
         </a>
     </div>
     
-    <div ng-repeat="candidate in candidates | megaFilter: {'query': search, 'type': searchMode} | orderBy:sortMode:getSortDesc()" class="col-xs-12 col-sm-6 col-md-4 col-lg-3 basic-tile-list">
+    <div ng-repeat="candidate in candidates | megaFilter: {'query': search, 'type': searchMode} | orderBy:sortMode:getSortDesc()" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
         <a href="/candidates/view/{{candidate._id}}" class="basic-tile-parent">
             <basic-tile header="candidate.firstName + ' ' + candidate.lastName" icon="'candidate'" details="pickRelevant(candidate)"></basic-tile>
         </a>

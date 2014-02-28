@@ -7,7 +7,7 @@ angular.module('caseCompApp')
       $scope.um = {};
       $scope.udm = {};
       
-      $scope.sortMode = 'name';
+      $scope.sortMode = 'firstName';
       $scope.sortString = 'Name';
       //Does the opposite of what it sounds like:
       $scope.sortDesc = false;
@@ -18,23 +18,34 @@ angular.module('caseCompApp')
       
       if($routeParams.id){
           $scope.edit = true;
-          Candidates.get({id: $routeParams.id}, function(res){
-              $scope.um = res;
-          }, function(){
-              $location.path('/candidates');
-          })
       }
       
-      Candidates.list(function(jobs){
-          //Add name field for searching:
-          _.forEach(jobs.candidates, function(el){
-              el.name = el.firstName + ' ' + el.lastName;
-          });
-          $scope.candidates = jobs.candidates;
-      });
+      var updateData = function(){
+          NProgress.start();
+          if($scope.edit){
+              Candidates.get({id: $routeParams.id}, function(res){
+                  NProgress.done();
+                  $scope.um = res;
+              }, function(){
+                  NProgress.done();
+                  $location.path('/candidates');
+              });
+          }else{
+              Candidates.list(function(jobs){
+                  NProgress.done();
+                  //Add name field for searching:
+                  _.forEach(jobs.candidates, function(el){
+                      el.name = el.firstName + ' ' + el.lastName;
+                  });
+                  $scope.candidates = jobs.candidates;
+              });
+          }
+      }
+      
+      updateData();
       
       $scope.pickRelevant = function(candidate){
-          if($scope.sortMode.toLowerCase() === 'name'){
+          if($scope.sortMode.toLowerCase() === 'name' || $scope.sortMode.toLowerCase() === 'firstname'){
               return candidate.university;
           }else if($scope.sortMode.toLowerCase() === 'gpa'){
               return (candidate.GPA + ' GPA') || candidate.university || '';
@@ -70,9 +81,15 @@ angular.module('caseCompApp')
       
       $scope.addClicked = function(){
           NProgress.start();
-          $modal.open({
+          var modalInstance = $modal.open({
               templateUrl: 'partials/addCandidate.html',
               controller: 'ModalController'
+          });
+          
+          modalInstance.result.then(function (selectedItem) {
+            updateData();
+          }, function () {
+              //$log.info('Modal dismissed at: ' + new Date());
           });
       }
       

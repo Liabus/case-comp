@@ -11,7 +11,7 @@
     "angular-sanitize": "1.2.6",
     "angular-route": "1.2.6",
     "fastclick": "~0.6.12",
-    "font-awesome": "~4.0.3",
+    "font-awesome": "4.0.4-wip",
     "nprogress": "~0.1.2",
     "chartjs": "*",
     "bootstrap": "~3.1.1",

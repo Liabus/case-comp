@@ -31,12 +31,17 @@
         
         <div class="form-group">
             <label>University</label>
-            <input type="text" class="form-control" ng-model="model.university" required>
+            <input type="text" class="select2-selector" ui-select2="inputUniversities" ng-model="model.university" required>
         </div>
         
         <div class="form-group">
             <label>Major</label>
-            <input type="text" class="form-control" ng-model="model.major" required>
+            <input type="text" class="select2-selector" ui-select2="inputMajors" ng-model="model.major" ng-required="true">
+        </div>
+        
+        <div class="form-group">
+            <label>Minor</label>
+            <input type="text" class="select2-selector" ui-select2="inputMinors" ng-model="model.minor" ng-required="true">
         </div>
         
         <div class="form-group">

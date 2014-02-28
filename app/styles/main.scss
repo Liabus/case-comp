@@ -236,6 +236,13 @@ a {
     border-bottom-left-radius: 0 !important;
 }
 
+.select2-container {
+    width: 100%;
+    ul {
+        border-radius: 4px;
+    }
+}
+
 /* Basic Tile */
 
 .basic-tile-parent {
@@ -283,6 +290,9 @@ a {
         text-overflow: ellipsis;
         
         span {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
             display: block;
             font-size: 1.2em;
             font-weight: bold;
@@ -297,6 +307,27 @@ a {
     };
 }
 
+/*
+    Better Tabs:
+*/
+
+.nav-tabs {
+    border-bottom: none;
+    margin-bottom: 20px;
+}
+
+.nav-tabs > li.active > a:hover,
+.nav-tabs > li.active > a {
+    border: none;
+    border-bottom: 5px solid #D64A4D;
+}
+
+.nav-tabs > li > a {
+    padding: 10px 20px;
+    border: none;
+    border-bottom: 5px solid transparent;
+    color: #D64A4D;
+}
 
 #jobs-top {
 	height: 80px;
