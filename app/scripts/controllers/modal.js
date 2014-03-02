@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('caseCompApp')
-    .controller('ModalController', function ($scope, $routeParams, $location, $timeout, $modalInstance, Candidates, Events, Jobs) {
+    .controller('ModalController', function ($scope, $routeParams, $location, $timeout, $modalInstance, ForcedData, Candidates, Events, Jobs) {
+        
+        ForcedData = ForcedData || {};
+        
         $scope.model = {};
         
         var slicer = {
@@ -10,7 +13,7 @@ angular.module('caseCompApp')
             'jobs': Jobs
         };
         
-        var mode = $location.path().split('/')[1];
+        var mode = ForcedData.mode || $location.path().split('/')[1];
         var data = slicer[mode];
         
         $scope.edit = false;
@@ -29,12 +32,20 @@ angular.module('caseCompApp')
             NProgress.done();
         }
         
-        $scope.label = function(){
+        if(ForcedData){
+            $scope.edit = ForcedData.edit;
+        }
+        
+        
+        $scope.label = function(exp){
+            
+            var title = exp || ForcedData.title || mode.charAt(0).toUpperCase() + mode.slice(1).substring(0, mode.length - 2);
+            
             //Cap first letter and remove the plural 's'.
             if($scope.edit){
-                return 'Edit ' + mode.charAt(0).toUpperCase() + mode.slice(1).substring(0, mode.length - 2);
+                return 'Edit ' + title;
             }
-            return 'Add ' + mode.charAt(0).toUpperCase() + mode.slice(1).substring(0, mode.length - 2);
+            return 'Add ' + title;
         }
         
         $scope.add = function(){
@@ -137,4 +148,29 @@ angular.module('caseCompApp')
                 'Other'
             ]
         }
+        
+        
+        $scope.queryUsersOptions = {
+            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                url: '/api/users/search',
+                data: function (term) {
+                    return {
+                        q: term // search term
+                    };
+                },
+                results: function (data) { // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to alter remote JSON data
+                    
+                    var mdata = _.map(data.users, function(usr){
+                        return {
+                            id: usr._id,
+                            text: usr.name || usr.email
+                        };
+                    });
+                    
+                    return {results: mdata};
+                }
+            }
+        }
+        
     });

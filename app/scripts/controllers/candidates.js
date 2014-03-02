@@ -139,6 +139,38 @@ angular.module('caseCompApp')
           });
       }
       
+      $scope.showInterview = function(){
+          var modalInstance = $modal.open({
+            templateUrl: 'partials/addInterview.html',
+            controller: 'ModalController',
+            resolve: {
+                'ForcedData': function(){
+                    return {
+                        edit: false,
+                        mode: 'candidates',
+                        title: 'Interview'
+                    };
+                }
+            }
+          });
+
+          modalInstance.result.then(function (resAction) {
+              if(resAction === 'yes'){
+                  NProgress.start();
+                  Candidates.delete({id: $routeParams.id}, function(res){
+                      NProgress.done();
+                      $location.path('/candidates');
+                  }, function(err){
+                      console.log(err);
+                      NProgress.done();
+                      alert('An unknown error occured while deleting the candidate.');
+                  });
+              }
+          }, function () {
+              //Nope.
+          });
+      }
+      
       $scope.addInterview = function(){
           $scope.udm._id = $scope.um._id;
           Candidates.interview($scope.udm, function(){
