@@ -209,10 +209,11 @@ body {
     background-color: #D64A4D !important;
     border-color: #AC4245 !important;
     &:hover, &:focus, &:active {
-        background-color: #BB2F33;
-        border-color: #96272A;
+        background-color: #BB2F33 !important;
+        border-color: #96272A !important;
     }
 }
+
 
 .page-header {
     margin-top: 0px;
@@ -367,7 +368,6 @@ a {
 	padding-top: 10px;
 	padding-left: 7px;
 	padding-right: 5px;
-    margin-bottom: 10px;
 	min-height: 40px;
 	border-bottom: 1px solid #dfdfdf;
 }

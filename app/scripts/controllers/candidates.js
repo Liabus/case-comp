@@ -94,6 +94,37 @@ angular.module('caseCompApp')
           $scope.searchString = str;
       }
       
+      $scope.deleteClicked = function(){
+          var modalInstance = $modal.open({
+            templateUrl: 'partials/deleteModal.html',
+            controller: 'DeleteModalController',
+            resolve: {
+              type: function () {
+                  return 'Candidate';
+              },
+              name: function () {
+                  return $scope.um.firstName + ' ' + $scope.um.lastName;
+              }
+            }
+          });
+
+          modalInstance.result.then(function (resAction) {
+              if(resAction === 'yes'){
+                  NProgress.start();
+                  Candidates.delete({id: $routeParams.id}, function(res){
+                      NProgress.done();
+                      $location.path('/candidates');
+                  }, function(err){
+                      console.log(err);
+                      NProgress.done();
+                      alert('An unknown error occured while deleting the candidate.');
+                  });
+              }
+          }, function () {
+              //Nope.
+          });
+      }
+      
       $scope.addClicked = function(){
           NProgress.start();
           var modalInstance = $modal.open({
@@ -104,7 +135,7 @@ angular.module('caseCompApp')
           modalInstance.result.then(function (selectedItem) {
             updateData();
           }, function () {
-              //$log.info('Modal dismissed at: ' + new Date());
+              //console.log('Modal dismissed at: ' + new Date());
           });
       }
       

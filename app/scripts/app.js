@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRoute", "ui.bootstrap", "ui.select2" ]).config(function($routeProvider, $locationProvider, $httpProvider) {
+angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRoute", "ui.bootstrap", "ui.select2", "ui.mask" ]).config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider.when("/", {
         redirectTo: "/dashboard",
         authenticate: true

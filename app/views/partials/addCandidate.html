@@ -21,7 +21,7 @@
         
         <div class="form-group">
             <label>Phone</label>
-            <input type="tel" class="form-control mask-phone" ng-model="model.phone" required>
+            <input type="tel" class="form-control" ui-mask="(999) 999-9999" ng-model="model.phone" required>
         </div>
         
         <div class="form-group">
@@ -46,7 +46,7 @@
         
         <div class="form-group">
             <label>GPA</label>
-            <input type="text" class="form-control mask-decimal" ng-model="model.GPA" required>
+            <input type="text" class="form-control mask-decimal" ui-mask="9?.99" ng-model="model.GPA">
         </div>
         
         <div class="form-group">

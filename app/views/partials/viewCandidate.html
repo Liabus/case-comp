@@ -1,6 +1,17 @@
   <div id="jobs-top">
       
-      <button class="pull-right btn btn-default">Delete Candidate</button>
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-primary" ng-click="addClicked()">Edit Candidate</button>
+        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+          <span class="caret"></span>
+          <span class="sr-only">Toggle Dropdown</span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li><a ng-click="addClicked()">Edit Candidate</a></li>
+          <li class="divider"></li>
+          <li><a ng-click="deleteClicked()">Delete Candidate</a></li>
+        </ul>
+      </div>
       
       <h1>{{um.firstName + ' ' + um.lastName}}</h1>
       <h5>{{deArray(um.major)}}&nbsp;&nbsp;&nbsp;–&nbsp;&nbsp;&nbsp;{{deArray(um.university)}}</h5>
@@ -11,7 +22,7 @@
         <div class="job-description">
               <div class="descript-header">
                   <p>Description<p>
-                  <button ng-click="addClicked()" class="btn">Edit</button>
+                  <!-- <button ng-click="addClicked()" class="btn">Edit</button> -->
               </div>
               <div class="descript-content">
                   <div class="descript-row clearfix">
@@ -68,10 +79,11 @@
           </div>
     </tab>
     <tab heading="Interviews">
-        <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button>
-  
-       <h3>Interviews</h3>
-       <div class="m20b">
+
+<!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
+       <div>
+           
+           <a class="btn btn-block btn-lg btn-default"> <span class="fa fa-plus"></span> Add Interview </a>
      
            <div class="job-description" ng-repeat="int in um.interview">
                <div class="descript-header">

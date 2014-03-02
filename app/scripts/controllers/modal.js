@@ -71,17 +71,6 @@ angular.module('caseCompApp')
         $scope.cancel = function(){
             $modalInstance.dismiss('cancel');
         }
-        
-        $timeout(function(){
-            $('.mask-decimal').inputmask('9.99', {placeholder: '', clearMaskOnLostFocus: true});
-            $('.mask-phone').inputmask('(999) 999-9999');
-        });
-        
-        
-        
-        
-        
-        
         $scope.inputUniversities = {
             multiple: true,
             simple_tags: true,
