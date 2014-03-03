@@ -1,17 +1,21 @@
   <div id="jobs-top">
       
       <div class="btn-group pull-right">
-        <button type="button" class="btn btn-primary" ng-click="addClicked()">Edit Candidate</button>
+        <button type="button" class="btn btn-primary" ng-click="addClicked()">Edit {{applicants ? 'Applicant' : 'Candidate'}}</button>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
           <span class="caret"></span>
           <span class="sr-only">Toggle Dropdown</span>
         </button>
         <ul class="dropdown-menu" role="menu">
-          <li><a ng-click="addClicked()">Edit Candidate</a></li>
+          <li><a ng-click="addClicked()">Edit {{applicants ? 'Applicant' : 'Candidate'}}</a></li>
           <li class="divider"></li>
-          <li><a ng-click="deleteClicked()">Delete Candidate</a></li>
+          <li ng-show="applicants"><a ng-click="upgradeCandidate()">Upgrade To Candidate</a></li>
+          <li ng-show="!applicants"><a ng-click="downgradeCandidate()">Downgrade To Applicant</a></li>
+          <li><a ng-click="deleteClicked()">Delete {{applicants ? 'Applicant' : 'Candidate'}}</a></li>
         </ul>
       </div>
+      
+      <button type="button" class="btn btn-default pull-right" style="margin-right: 10px;" ng-click="upgradeCandidate()" ng-show="applicants">Upgrade To Candidate</button>
       
       <h1>{{um.firstName + ' ' + um.lastName}}</h1>
       <h5>{{deArray(um.major)}}&nbsp;&nbsp;&nbsp;–&nbsp;&nbsp;&nbsp;{{deArray(um.university)}}</h5>
@@ -37,7 +41,7 @@
           
                   <div class="descript-row clearfix">
                       <div class="desc-left">Phone</div>
-                      <div class="desc-right">{{um.phone}}</div>
+                      <div class="desc-right">{{formatPhone(um.phone)}}</div>
                   </div>
                   <div class="descript-row clearfix">
                       <div class="desc-left">Address</div>
@@ -78,7 +82,7 @@
               </div>
           </div>
     </tab>
-    <tab heading="Interviews">
+    <tab heading="Interviews" ng-show="!applicants">
 
 <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
        <div>

@@ -22,7 +22,9 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         templateUrl: "partials/analytics",
         controller: "analyticsController",
         authenticate: true
-    }).when("/jobs", {
+    })
+    
+    .when("/jobs", {
         templateUrl: "partials/jobs",
         controller: "jobsController",
         authenticate: true
@@ -38,7 +40,9 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         templateUrl: "partials/addJob",
         controller: "jobsController",
         authenticate: true
-    }).when("/events", {
+    })
+    
+    .when("/events", {
         templateUrl: "partials/events",
         controller: "eventsController",
         authenticate: true
@@ -58,7 +62,9 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         templateUrl: "partials/addAttendee",
         controller: "eventsController",
         authenticate: true
-    }).when("/candidates", {
+    })
+    
+    .when("/candidates", {
         templateUrl: "partials/candidates",
         controller: "candidatesController",
         authenticate: true
@@ -78,9 +84,23 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         templateUrl: "partials/addInterview",
         controller: "candidatesController",
         authenticate: true
-    }).otherwise({
+    })
+    
+    .when("/applicants", {
+        templateUrl: "partials/candidates",
+        controller: "candidatesController",
+        authenticate: true
+    }).when("/applicants/view/:id", {
+        templateUrl: "partials/viewCandidate",
+        controller: "candidatesController",
+        authenticate: true
+    })
+    
+    .otherwise({
         redirectTo: "/dashboard"
     });
+    
+    
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push([ "$q", "$location", function($q, $location) {
         return {

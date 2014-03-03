@@ -99,6 +99,12 @@ body {
 .sidebar-nav-item {
     border-bottom: 1px solid rgb(220,220,209);
 }
+
+.sidebar-nav-item.active .badge {
+    background: #fff;
+    color: #2A2A2A;
+}
+
 .sidebar-nav-item > a {
     font-size: 0.9em;
     text-transform: uppercase;
@@ -194,6 +200,9 @@ body {
     text-align:center;
 }
 
+.datepick table {
+    margin: 10px;
+}
 .datepick td {
      padding: 2px;
 }
@@ -290,13 +299,20 @@ a {
         overflow: hidden;
         text-overflow: ellipsis;
         
-        span {
+        .main {
             white-space: nowrap;
             text-overflow: ellipsis;
             overflow: hidden;
             display: block;
             font-size: 1.2em;
             font-weight: bold;
+        }
+        .sub {
+            max-height: 30px;
+            font-size: 0.8em;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: block;
         }
     }
     

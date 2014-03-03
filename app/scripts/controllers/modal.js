@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('caseCompApp')
-    .controller('ModalController', function ($scope, $routeParams, $location, $timeout, $modalInstance, ForcedData, Candidates, Events, Jobs) {
+    .controller('ModalController', function ($scope, $routeParams, $location, $timeout, $modalInstance, ForcedData, Applicants, Candidates, Events, Jobs) {
         
         ForcedData = ForcedData || {};
         
@@ -9,6 +9,7 @@ angular.module('caseCompApp')
         
         var slicer = {
             'candidates': Candidates,
+            'applicants': Applicants,
             'events': Events,
             'jobs': Jobs
         };
@@ -18,7 +19,7 @@ angular.module('caseCompApp')
         
         $scope.edit = false;
         
-        if($routeParams.id){
+        if($routeParams.id && !ForcedData.noedit){
             $scope.edit = true;
             data.get({id: $routeParams.id}, function(res){
                 NProgress.done();
@@ -32,8 +33,12 @@ angular.module('caseCompApp')
             NProgress.done();
         }
         
-        if(ForcedData){
+        if(ForcedData && typeof ForcedData.edit === 'boolean'){
             $scope.edit = ForcedData.edit;
+        }
+        
+        if(ForcedData && ForcedData.datetime){
+            $scope.model.datetime = $scope.model.datetime || new Date();
         }
         
         
@@ -50,34 +55,53 @@ angular.module('caseCompApp')
         
         $scope.add = function(){
             NProgress.start();
-            if($scope.edit){
-                data.update($scope.model,
-                    function(user) {
-                        NProgress.done();
-                        $modalInstance.close('ok');
-                    },
-                    function(err) {
-                        NProgress.done();
-                        console.log(err);
-                        alert('An error occured while saving.');
-                        //$modalInstance.close('bad');
-                    }
-                );
+            
+            _.extend($scope.model, ForcedData.mixin || {});
+            
+            if(ForcedData.upload){
+                ForcedData.upload($scope.model, function(){
+                    NProgress.done();
+                    $modalInstance.close('ok');
+                });
             }else{
-                data.save($scope.model,
-                  function(user) {
-                      NProgress.done();
-                      $modalInstance.close('ok');
-                  },
-                  function(err) {
-                      NProgress.done();
-                      console.log(err);
-                      alert('An error occured while saving.');
-                      //$modalInstance.close('bad');
-                  }
-                );
-            }
+                if($scope.edit){
+                    data.update($scope.model,
+                        function(user) {
+                            NProgress.done();
+                            $modalInstance.close('ok');
+                        },
+                        function(err) {
+                            NProgress.done();
+                            console.log(err);
+                            alert('An error occured while saving.');
+                            //$modalInstance.close('bad');
+                        }
+                    );
+                }else{
+                    data.save($scope.model,
+                      function(user) {
+                          NProgress.done();
+                          $modalInstance.close('ok');
+                      },
+                      function(err) {
+                          NProgress.done();
+                          console.log(err);
+                          alert('An error occured while saving.');
+                          //$modalInstance.close('bad');
+                      }
+                    );
+                }
+            }   
         }
+        
+        $scope.openDate = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+            
+            $timeout(function(){
+                $($event.target).closest('.datepick').find('input').focus();
+            });
+        };
         
         $scope.cancel = function(){
             $modalInstance.dismiss('cancel');

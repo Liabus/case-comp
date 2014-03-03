@@ -1,6 +1,6 @@
 <div class="page-header clearfix">
     
-  <h2 class="pull-left hidden-sm">Candidates</h2>
+  <h2 class="pull-left hidden-sm">{{applicants ? 'Applicants' : 'Candidates'}}</h2>
   
   <div class="header-controls pull-left">
     <div class="input-group" style="max-width: 400px;">
@@ -55,7 +55,7 @@
     </div>
     
     <div ng-repeat="candidate in candidates | megaFilter: {'query': search, 'type': searchMode} | orderBy:sortMode:getSortDesc()" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
-        <a href="/candidates/view/{{candidate._id}}" class="basic-tile-parent">
+        <a href="/{{applicants ? 'applicants' : 'candidates'}}/view/{{candidate._id}}" class="basic-tile-parent">
             <basic-tile header="candidate.firstName + ' ' + candidate.lastName" icon="'candidate'" details="pickRelevant(candidate)"></basic-tile>
         </a>
     </div>

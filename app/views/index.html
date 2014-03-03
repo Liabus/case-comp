@@ -80,9 +80,12 @@
             <li class="sidebar-nav-item" ng-class="{active: isActive('dashboard')}"><a href="/dashboard"><i class="fa fa-tachometer" id="side-dashboard"></i> Dashboard</a></li>
             <li class="sidebar-nav-item"  ng-class="{active: isActive('jobs')}" id="side-jobs"><a href="/jobs"><i class="fa fa-suitcase"></i> Jobs</a></li>
             <li class="sidebar-nav-item"  ng-class="{active: isActive('candidates')}" id="side-candidates"><a href="/candidates"><i class="fa fa-users"></i> Candidates</a></li>
+            
+             <li class="sidebar-nav-item"  ng-class="{active: isActive('applicants')}" id="side-applicants"><a href="/applicants"><i class="fa fa-envelope"></i> Applicants <!-- <span class="pull-right badge" ng-show="applicantCount" ng-bind="applicantCount"></span>--> </a></li>
+             
             <li class="sidebar-nav-item"  ng-class="{active: isActive('events')}" id="side-events"><a href="/events"><i class="fa fa-calendar"></i> Events</a></li>
             <li class="sidebar-nav-item"  ng-class="{active: isActive('analytics')}" id="side-anal"><a href="/analytics"><i class="fa fa-tasks"></i> Analytics</a></li>
-            <li class="sidebar-nav-item"  ng-class="{active: isActive('settings')}" id="side-anal"><a href="/settings"><i class="fa fa-cogs"></i> Settings</a></li>
+            <li class="sidebar-nav-item"  ng-class="{active: isActive('settings')}" id="side-settings"><a href="/settings"><i class="fa fa-cogs"></i> Settings</a></li>
           </ul>
         </div>
         
@@ -127,6 +130,7 @@
     <script src="bower_components/lodash/dist/lodash.compat.js"></script>
     <script src="bower_components/select2/select2.js"></script>
     <script src="bower_components/angular-ui-select2/src/select2.js"></script>
+    <script src="bower_components/moment/moment.js"></script>
     <!-- endbower -->
     
     <!-- endbuild -->
@@ -155,6 +159,7 @@
         <script src="scripts/services/session.js"></script>
         <script src="scripts/services/user.js"></script>
         <script src="scripts/services/candidates.js"></script>
+        <script src="scripts/services/applicants.js"></script>
         <script src="scripts/services/jobs.js"></script>
         <script src="scripts/services/events.js"></script>
         

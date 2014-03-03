@@ -1,11 +1,19 @@
 'use strict';
 
 angular.module('caseCompApp')
-  .controller('candidatesController', function ($scope, Candidates, $location, $routeParams, $modal) {
+  .controller('candidatesController', function ($scope, Candidates, Applicants, $location, $routeParams, $modal) {
       $scope.edit = false;
       $scope.candidates = [];
       $scope.um = {};
       $scope.udm = {};
+      
+      $scope.applicants = ($location.path().split('/')[1] === 'applicants');
+      
+      var dataSet = Candidates;
+      if($scope.applicants){
+          dataSet = Applicants;
+      }
+      
       
       $scope.sortMode = 'name';
       $scope.sortString = 'Name';
@@ -23,7 +31,7 @@ angular.module('caseCompApp')
       var updateData = function(){
           NProgress.start();
           if($scope.edit){
-              Candidates.get({id: $routeParams.id}, function(res){
+              dataSet.get({id: $routeParams.id}, function(res){
                   NProgress.done();
                   $scope.um = res;
               }, function(){
@@ -31,7 +39,7 @@ angular.module('caseCompApp')
                   $location.path('/candidates');
               });
           }else{
-              Candidates.list(function(jobs){
+              dataSet.list(function(jobs){
                   NProgress.done();
                   //Add name field for searching:
                   _.forEach(jobs.candidates, function(el){
@@ -111,7 +119,7 @@ angular.module('caseCompApp')
           modalInstance.result.then(function (resAction) {
               if(resAction === 'yes'){
                   NProgress.start();
-                  Candidates.delete({id: $routeParams.id}, function(res){
+                  dataSet.delete({id: $routeParams.id}, function(res){
                       NProgress.done();
                       $location.path('/candidates');
                   }, function(err){
@@ -125,11 +133,62 @@ angular.module('caseCompApp')
           });
       }
       
+      $scope.upgradeCandidate = function(){
+          if($scope.applicants){
+              NProgress.start();
+              $scope.um.applicant = false;
+              dataSet.update($scope.um, function(dat){
+                  NProgress.done();
+                  if(dat[0] === 'O'){
+                      $location.path('/candidates');
+                  }else{
+                      alert('An error occured while upgrading applicant.');
+                  }
+              });
+          }
+      }
+      
+      $scope.downgradeCandidate = function(){
+          if(!$scope.applicants){
+              NProgress.start();
+              $scope.um.applicant = true;
+              dataSet.update($scope.um, function(dat){
+                  NProgress.done();
+                  if(dat[0] === 'O'){
+                      $location.path('/applicants');
+                  }else{
+                      alert('An error occured while upgrading applicant.');
+                  }
+              });
+          }
+      }
+      
+      $scope.formatPhone = function(input){
+          if(input){
+              return input.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+          }else{
+              return '';
+          }
+      }
+      
       $scope.addClicked = function(){
           NProgress.start();
+          
+          var mixin = {};
+          if($scope.applicants){
+              mixin.applicant = true;
+          }
+          
           var modalInstance = $modal.open({
               templateUrl: 'partials/addCandidate.html',
-              controller: 'ModalController'
+              controller: 'ModalController',
+              resolve: {
+                  'ForcedData': function(){
+                      return {
+                          mixin: mixin
+                      };
+                  }
+              }
           });
           
           modalInstance.result.then(function (selectedItem) {
@@ -146,9 +205,16 @@ angular.module('caseCompApp')
             resolve: {
                 'ForcedData': function(){
                     return {
-                        edit: false,
+                        noedit: true,
+                        datetime: true,
                         mode: 'candidates',
-                        title: 'Interview'
+                        title: 'Interview',
+                        //Custom modal logic to add interview:
+                        upload: function(model, cb){
+                            model._id = $scope.um._id;
+                            model.id = 'interview';
+                            Candidates.interview(model, cb);
+                        }
                     };
                 }
             }
@@ -157,7 +223,7 @@ angular.module('caseCompApp')
           modalInstance.result.then(function (resAction) {
               if(resAction === 'yes'){
                   NProgress.start();
-                  Candidates.delete({id: $routeParams.id}, function(res){
+                  dataSet.delete({id: $routeParams.id}, function(res){
                       NProgress.done();
                       $location.path('/candidates');
                   }, function(err){
@@ -173,14 +239,14 @@ angular.module('caseCompApp')
       
       $scope.addInterview = function(){
           $scope.udm._id = $scope.um._id;
-          Candidates.interview($scope.udm, function(){
+          dataSet.interview($scope.udm, function(){
               $location.path('/candidates/view/' + $scope.um._id);
           });
       }
       
       $scope.addCandidate = function(){
           if($scope.edit){
-              Candidates.update($scope.um,
+              dataSet.update($scope.um,
                   function(user) {
                       $location.path('/candidates/view/' + $scope.um._id);
                   },
@@ -190,7 +256,7 @@ angular.module('caseCompApp')
                   }
               );
           }else{
-            Candidates.save($scope.um,
+            dataSet.save($scope.um,
                 function(user) {
                     $location.path('/candidates');
                 },
