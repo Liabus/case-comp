@@ -1,22 +1,9 @@
 'use strict';
 
 angular.module('caseCompApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, Applicants) {
+  .controller('NavbarCtrl', function ($scope, $rootScope, $location, Auth) {
       
-      
-      $scope.applicantCount = 0;
-      
-      var updateData = function(){
-          Applicants.list({}, function(data){
-              $scope.applicantCount = (data.candidates || []).length;
-          });
-      };
-      
-      updateData();
-      
-      $scope.$on('ApplicantUpdate', function(){
-          updateData();
-      });
+      $scope.user = $rootScope.currentUser;
       
     $scope.logout = function() {
         console.log('logging out');

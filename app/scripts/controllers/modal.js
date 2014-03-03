@@ -175,6 +175,7 @@ angular.module('caseCompApp')
         
         
         $scope.queryUsersOptions = {
+            multiple: ForcedData.usersMultiple || false,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: '/api/users/search',
                 data: function (term) {
