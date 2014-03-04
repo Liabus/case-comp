@@ -1,13 +1,10 @@
 'use strict';
 
 angular.module('caseCompApp')
-  .controller('jobsController', function ($scope, Jobs, $location, $routeParams) {
+  .controller('jobsController', function ($scope, Jobs, $location, $routeParams, $modal) {
       $scope.edit = false;
       $scope.jobs = [];
       $scope.jobModel = {};
-      
-      
-      
       
       
       
@@ -29,7 +26,7 @@ angular.module('caseCompApp')
           if($scope.edit){
               Jobs.get({id: $routeParams.id}, function(res){
                   NProgress.done();
-                  $scope.um = res;
+                  $scope.jobModel = res;
               }, function(){
                   NProgress.done();
                   $location.path('/jobs');

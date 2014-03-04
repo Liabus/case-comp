@@ -1,112 +1,117 @@
-  <div id="jobs-top">
-      <h1>{{jobModel.name}}</h1>
-      <h5>{{jobModel.location}}</h5>
-  </div>
-
-  <h3>Job Details</h3>
-<div class="tab-content">
-  <div class="tab-pane active" id="tab1">
-    <div class="job-description">
-          <div class="descript-header">
-              <p>Description<p>
-              <a href="/jobs/edit/{{jobModel._id}}" class="btn">Edit</a>
-          </div>
-          <div class="descript-content">
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Name</div>
-                  <div class="desc-right">{{jobModel.name}}</div>
-              </div>
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Location</div>
-                  <div class="desc-right">{{jobModel.location}}</div>
-              </div>
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Type</div>
-                  <div class="desc-right">{{jobModel.type}}</div>
-              </div>
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Experience</div>
-                  <div class="desc-right">{{jobModel.experience}}</div>
-              </div>
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Status</div>
-                  <div class="desc-right">{{jobModel.status}}</div>
-              </div>
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Salary</div>
-                  <div class="desc-right">{{jobModel.salary}}</div>
-              </div>
-              <div class="descript-row clearfix">
-                  <div class="desc-left">Description</div>
-                  <div class="desc-right long">{{jobModel.description}}</div>
-              </div>
-          </div>
-      </div>
-  </div>
-  
- <h3>Applicants</h3>
-     <!-- 
-         <a href="/" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add Applicant </a>
-         -->
-     
-  <div>
-    <div id="dash-applicants">
-      <div class="row">
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-      </div>
-      <div class="row">
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-
-          <div class="tile">
-              <div class="candidate-icon">
-                  <i class="fa fa-user"></i>
-              </div>
-          </div>
-      </div>
+<div id="jobs-top">
+    <div class="btn-group pull-right">
+      <button type="button" class="btn btn-primary" ng-click="addClicked()">Edit Job</button>
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="addClicked()">Edit Job</a></li>
+        <li class="divider"></li>
+        <li><a ng-click="deleteClicked()">Delete Job</a></li>
+      </ul>
     </div>
-  </div>
+    
+    <h1>{{jobModel.name}}</h1>
+    <h5>{{jobModel.type}}&nbsp;&nbsp;&nbsp;–&nbsp;&nbsp;&nbsp;{{jobModel.location}}</h5>
+</div>
+  
+  <tabset>
+      <tab heading="Details">
+          <div class="job-description">
+                <div class="descript-header">
+                    <p>Description<p>
+                    <!-- <button ng-click="addClicked()" class="btn">Edit</button> -->
+                </div>
+                <div class="descript-content">
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Name</div>
+                        <div class="desc-right">{{jobModel.name}}</div>
+                    </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Location</div>
+                        <div class="desc-right">{{jobModel.location}}</div>
+                    </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Type</div>
+                        <div class="desc-right">{{jobModel.type}}</div>
+                    </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Experience</div>
+                        <div class="desc-right">{{jobModel.experience}}</div>
+                    </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Status</div>
+                        <div class="desc-right">{{jobModel.status}}</div>
+                    </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Salary</div>
+                        <div class="desc-right">{{jobModel.salary}}</div>
+                    </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Description</div>
+                        <div class="desc-right long">{{jobModel.description}}</div>
+                    </div>
+                </div>
+            </div>
+      </tab>
+      <tab heading="Applicants">
+
+  <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
+         <div>
+           
+             <a ng-click="addApplicant()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add Applicant </a>
+     
+             <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
+                 <div class="descript-header">
+                     <p>{{int.type}}<p>
+                 </div>
+                 <div class="descript-content">
+                     <div class="descript-row">
+                         <div class="desc-left">Date</div>
+                         <div class="desc-right">{{int.datetime}}</div>
+                     </div>
+                     <div class="descript-row">
+                         <div class="desc-left">Interviewer</div>
+                         <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
+                     </div>
+                     <div class="descript-row">
+                         <div class="desc-left">Notes</div>
+                         <div class="desc-right">{{int.notes}}</div>
+                     </div>
+                 </div>
+             </div>
+     
+         </div>
+      </tab>
+    
+      <tab heading="Offers">
+
+  <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
+         <div>
+           
+             <a ng-click="createOffer()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Create Offer </a>
+     
+             <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
+                 <div class="descript-header">
+                     <p>{{int.type}}<p>
+                 </div>
+                 <div class="descript-content">
+                     <div class="descript-row">
+                         <div class="desc-left">Date</div>
+                         <div class="desc-right">{{int.datetime}}</div>
+                     </div>
+                     <div class="descript-row">
+                         <div class="desc-left">Interviewer</div>
+                         <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
+                     </div>
+                     <div class="descript-row">
+                         <div class="desc-left">Notes</div>
+                         <div class="desc-right">{{int.notes}}</div>
+                     </div>
+                 </div>
+             </div>
+     
+         </div>
+      </tab>
+  </tabset>

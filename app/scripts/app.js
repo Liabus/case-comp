@@ -10,15 +10,26 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         authenticate: true
     }).when("/login", {
         templateUrl: "partials/login",
-        controller: "LoginCtrl"
+        controller: "LoginCtrl",
+        reverseAuthenticate: true
     }).when("/signup", {
         templateUrl: "partials/signup",
-        controller: "SignupCtrl"
-    }).when("/settings", {
+        controller: "SignupCtrl",
+        authenticate: true
+    })
+    
+    .when("/settings/user", {
         templateUrl: "partials/settings",
         controller: "SettingsCtrl",
         authenticate: true
-    }).when("/analytics", {
+    })
+    .when("/settings/user", {
+        templateUrl: "partials/settingsUser",
+        controller: "SettingsCtrl",
+        authenticate: true
+    })
+    
+    .when("/analytics", {
         templateUrl: "partials/analytics",
         controller: "analyticsController",
         authenticate: true
@@ -119,6 +130,8 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
     $rootScope.$on("$routeChangeStart", function(event, next) {
         if (next.authenticate && !Auth.isLoggedIn()) {
             $location.path("/login");
+        } else if(next.reverseAuthenticate && Auth.isLoggedIn()) {
+            $location.path("/dashboard");
         } else {
             NProgress.start();
         }
