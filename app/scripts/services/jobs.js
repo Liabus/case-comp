@@ -8,9 +8,17 @@ angular.module('caseCompApp')
         list: {
             method: 'GET',
             params: {
-                
+
             }
         },
+
+        applicant: {
+            method: 'GET',
+            params: {
+              id: 'applicant'
+            }
+        },
+
         update: {
             method: 'PUT',
             params: {}

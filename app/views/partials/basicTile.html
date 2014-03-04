@@ -2,6 +2,7 @@
     <div class="picture">
         <i class="fa" ng-class="picon"></i>
     </div>
+    <span ng-show="edit" ng-click="editClicked($event)" class="fa fa-pencil edit-button"></span>
     <div class="details">
         <span class="main">{{header}}</span>
         <span class="sub">{{deArray(details)}}</span>

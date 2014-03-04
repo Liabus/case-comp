@@ -2,23 +2,23 @@
 
 angular.module('caseCompApp')
     .controller('ModalController', function ($scope, $routeParams, $location, $timeout, $modalInstance, ForcedData, Applicants, Candidates, Events, Jobs) {
-        
+
         ForcedData = ForcedData || {};
-        
+
         $scope.model = {};
-        
+
         var slicer = {
             'candidates': Candidates,
             'applicants': Applicants,
             'events': Events,
             'jobs': Jobs
         };
-        
+
         var mode = ForcedData.mode || $location.path().split('/')[1];
         var data = slicer[mode];
-        
+
         $scope.edit = false;
-        
+
         if($routeParams.id && !ForcedData.noedit){
             $scope.edit = true;
             data.get({id: $routeParams.id}, function(res){
@@ -30,34 +30,35 @@ angular.module('caseCompApp')
                 $modalInstance.dismiss('cancel');
             });
         }else{
+            _.extend($scope.model, ForcedData.defaultData || {});
             NProgress.done();
         }
-        
+
         if(ForcedData && typeof ForcedData.edit === 'boolean'){
             $scope.edit = ForcedData.edit;
         }
-        
+
         if(ForcedData && ForcedData.datetime){
             $scope.model.datetime = $scope.model.datetime || new Date();
         }
-        
-        
+
+
         $scope.label = function(exp){
-            
+
             var title = exp || ForcedData.title || mode.charAt(0).toUpperCase() + mode.slice(1).substring(0, mode.length - 2);
-            
+
             //Cap first letter and remove the plural 's'.
             if($scope.edit){
                 return 'Edit ' + title;
             }
             return 'Add ' + title;
         }
-        
+
         $scope.add = function(){
             NProgress.start();
-            
+
             _.extend($scope.model, ForcedData.mixin || {});
-            
+
             if(ForcedData.upload){
                 ForcedData.upload($scope.model, function(){
                     NProgress.done();
@@ -91,18 +92,18 @@ angular.module('caseCompApp')
                       }
                     );
                 }
-            }   
+            }
         }
-        
+
         $scope.openDate = function($event) {
             $event.preventDefault();
             $event.stopPropagation();
-            
+
             $timeout(function(){
                 $($event.target).closest('.datepick').find('input').focus();
             });
         };
-        
+
         $scope.cancel = function(){
             $modalInstance.dismiss('cancel');
         }
@@ -155,6 +156,7 @@ angular.module('caseCompApp')
                 'Other'
             ]
         };
+
         $scope.inputMinors = {
             multiple: true,
             simple_tags: true,
@@ -171,9 +173,8 @@ angular.module('caseCompApp')
                 'Technology and Management',
                 'Other'
             ]
-        }
-        
-        
+        };
+
         $scope.queryUsersOptions = {
             multiple: ForcedData.usersMultiple || false,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
@@ -185,17 +186,53 @@ angular.module('caseCompApp')
                 },
                 results: function (data) { // parse the results into the format expected by Select2.
                     // since we are using custom formatting functions we do not need to alter remote JSON data
-                    
+
                     var mdata = _.map(data.users, function(usr){
                         return {
                             id: usr._id,
                             text: usr.name || usr.email
                         };
                     });
-                    
+
                     return {results: mdata};
                 }
             }
-        }
-        
+        };
+
+        $scope.queryCandidateOptions = {
+            multiple: ForcedData.usersMultiple || false,
+            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                url: '/api/candidates/search',
+                data: function (term) {
+                    return {
+                        q: term // search term
+                    };
+                },
+                results: function (data) { // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to alter remote JSON data
+
+                    return {results: data.candidates};
+                }
+            },
+            id: function(can){
+              return {id: can._id};
+            },
+            formatResult: function(can) {
+                var markup = "<div class='candidate-search-result'>";
+
+                markup += '<strong>' + can.firstName + ' ' + can.lastName + '</strong><br />';
+                markup += '<span>' + can.university.join(', ') + '</span>';
+                markup += '<span>' + can.major.join(', ') + '</span>';
+                markup += '<span>GPA: ' + can.GPA + '</span>';
+
+                markup += "</div>";
+                return markup;
+            },
+            dropdownCssClass: "bigdrop",
+            escapeMarkup: function(m) { return m; },
+            formatSelection: function(can) {
+                return can.firstName + ' ' + can.lastName;
+            }
+        };
+
     });

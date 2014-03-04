@@ -264,23 +264,25 @@ a {
 }
 
 .basic-tile {
-    
+
     background-color: #D64A4D;
     padding: 20px;
     border: 1px solid transparent;
     display: block;
     overflow: hidden;
     text-overflow: ellipsis;
-    
+
+    position: relative;
+
     height: 90px;
-    
+
     &.add {
         text-align: center;
         line-height: 55px;
         color: #fff;
         font-size: 3em;
     }
-    
+
     .picture {
         color: #2A2A2A !important;
         height: 50px;
@@ -293,12 +295,28 @@ a {
         text-align: center;
         margin-right: 20px;
     }
-    
+
+    .edit-button {
+      float: right;
+      position: absolute;
+      top: 5px;
+      right: 5px;
+      padding: 5px;
+      border-radius: 4px;
+      color: #fff;
+      font-size: 1.4em;
+      &:hover {
+        color: #2A2A2A;
+        background: #fff;
+        cursor: pointer;
+      }
+    }
+
     .details {
         color: white;
         overflow: hidden;
         text-overflow: ellipsis;
-        
+
         .main {
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -315,13 +333,39 @@ a {
             display: block;
         }
     }
-    
+
     &:hover {
         background-color: #E76669;
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
         cursor: pointer;
         border: 1px solid #AC4245;
     };
+
+    &.filled {
+      opacity: 0.35;
+    }
+    &.pending {
+      opacity: 0.7;
+    }
+}
+
+/*
+    Candidate Search Results:
+*/
+
+.bigdrop.select2-container .select2-results {max-height: 300px;}
+.bigdrop .select2-results {max-height: 300px;}
+
+.candidate-search-result {
+  border-bottom: 1px solid #DDD;
+  padding-bottom: 5px;
+  span {
+    display: block;
+  }
+}
+
+.select2-highlighted .candidate-search-result {
+  border-bottom: 1px solid transparent;
 }
 
 /*
@@ -410,4 +454,3 @@ a {
 	background-color: rgb(214,74,77);
 	box-shadow: 1px 1px 1px 1px #d2d2d2;
 }
-

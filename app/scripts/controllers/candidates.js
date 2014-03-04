@@ -6,34 +6,42 @@ angular.module('caseCompApp')
       $scope.candidates = [];
       $scope.um = {};
       $scope.udm = {};
-      
+
       $scope.applicants = ($location.path().split('/')[1] === 'applicants');
-      
+
       var dataSet = Candidates;
       if($scope.applicants){
           dataSet = Applicants;
       }
-      
-      
+
+
       $scope.sortMode = 'name';
       $scope.sortString = 'Name';
       //Does the opposite of what it sounds like:
       $scope.sortDesc = false;
       $scope.sortBackwards = false;
-      
+
       $scope.searchMode = 'all';
       $scope.searchString = 'All';
-      
+
       if($routeParams.id){
           $scope.edit = true;
       }
-      
+
       var updateData = function(){
           NProgress.start();
           if($scope.edit){
               dataSet.get({id: $routeParams.id}, function(res){
                   NProgress.done();
-                  $scope.um = res;
+
+                  if(res.applicant && !$scope.applicants){
+                    $location.path('/applicants/view/' + res._id);
+                  }else if(!res.applicant && $scope.applicants){
+                    $location.path('/candidates/view/' + res._id);
+                  }else{
+                    $scope.um = res;
+                  }
+
               }, function(){
                   NProgress.done();
                   $location.path('/candidates');
@@ -49,7 +57,7 @@ angular.module('caseCompApp')
               });
           }
       }
-      
+
       $scope.deArray = function(det, first){
           if(_.isArray(det)){
               if(first){
@@ -59,15 +67,15 @@ angular.module('caseCompApp')
           }
           return det;
       }
-      
+
       updateData();
-      
+
       $scope.pickRelevant = function(candidate){
           var sm = $scope.sortMode.toLowerCase();
           if(sm === 'name' || sm === 'firstname') sm = '';
-          
+
           var rel = sm || (candidate.matched || '').toLowerCase() || 'name';
-          
+
           if(rel === 'name' || rel === 'firstname'){
               return candidate.university;
           }else if(rel === 'gpa'){
@@ -76,7 +84,7 @@ angular.module('caseCompApp')
               return candidate[rel] || candidate.university || '';
           }
       }
-      
+
       $scope.swapSortDirection = function(){
           $scope.sortDesc = !$scope.sortDesc;
       }
@@ -91,7 +99,7 @@ angular.module('caseCompApp')
           }
           return $scope.sortDesc;
       }
-      
+
       $scope.clearSearch = function(){
           $scope.searchMode = 'all';
           $scope.searchString = 'All';
@@ -101,7 +109,7 @@ angular.module('caseCompApp')
           $scope.searchMode = mode;
           $scope.searchString = str;
       }
-      
+
       $scope.deleteClicked = function(){
           var modalInstance = $modal.open({
             templateUrl: 'partials/deleteModal.html',
@@ -132,7 +140,7 @@ angular.module('caseCompApp')
               //Nope.
           });
       }
-      
+
       $scope.upgradeCandidate = function(){
           if($scope.applicants){
               NProgress.start();
@@ -147,7 +155,7 @@ angular.module('caseCompApp')
               });
           }
       }
-      
+
       $scope.downgradeCandidate = function(){
           if(!$scope.applicants){
               NProgress.start();
@@ -162,7 +170,7 @@ angular.module('caseCompApp')
               });
           }
       }
-      
+
       $scope.formatPhone = function(input){
           if(input){
               return input.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
@@ -170,15 +178,15 @@ angular.module('caseCompApp')
               return '';
           }
       }
-      
+
       $scope.addClicked = function(){
           NProgress.start();
-          
+
           var mixin = {};
           if($scope.applicants){
               mixin.applicant = true;
           }
-          
+
           var modalInstance = $modal.open({
               templateUrl: 'partials/addCandidate.html',
               controller: 'ModalController',
@@ -190,14 +198,14 @@ angular.module('caseCompApp')
                   }
               }
           });
-          
+
           modalInstance.result.then(function (selectedItem) {
             updateData();
           }, function () {
               //console.log('Modal dismissed at: ' + new Date());
           });
       }
-      
+
       $scope.showInterview = function(){
           var modalInstance = $modal.open({
             templateUrl: 'partials/addInterview.html',
@@ -236,14 +244,14 @@ angular.module('caseCompApp')
               //Nope.
           });
       }
-      
+
       $scope.addInterview = function(){
           $scope.udm._id = $scope.um._id;
           dataSet.interview($scope.udm, function(){
               $location.path('/candidates/view/' + $scope.um._id);
           });
       }
-      
+
       $scope.addCandidate = function(){
           if($scope.edit){
               dataSet.update($scope.um,
@@ -267,5 +275,5 @@ angular.module('caseCompApp')
             );
         }
       };
-      
+
   });
