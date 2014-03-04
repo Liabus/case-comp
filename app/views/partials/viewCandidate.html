@@ -111,4 +111,34 @@
      
        </div>
     </tab>
+    
+    <tab heading="Jobs" ng-show="!applicants">
+
+<!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
+       <div>
+           
+           <a ng-click="addToJob()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Job </a>
+     
+           <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
+               <div class="descript-header">
+                   <p>{{int.type}}<p>
+               </div>
+               <div class="descript-content">
+                   <div class="descript-row">
+                       <div class="desc-left">Date</div>
+                       <div class="desc-right">{{int.datetime}}</div>
+                   </div>
+                   <div class="descript-row">
+                       <div class="desc-left">Interviewer</div>
+                       <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
+                   </div>
+                   <div class="descript-row">
+                       <div class="desc-left">Notes</div>
+                       <div class="desc-right">{{int.notes}}</div>
+                   </div>
+               </div>
+           </div>
+     
+       </div>
+    </tab>
 </tabset>

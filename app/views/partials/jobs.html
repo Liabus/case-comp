@@ -1,14 +1,59 @@
-<div class="clearfix m20t">
-    <a href="/jobs/add" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add Job</a>
+<div class="page-header clearfix">
+    
+  <h2 class="pull-left hidden-sm">Jobs</h2>
+  
+  <div class="header-controls pull-left">
+    <div class="input-group" style="max-width: 400px;">
+        <span class="input-group-addon">
+            <span class="fa fa-search"></span>
+        </span>
+        <input type="search" placeholder="Search Jobs..." class="form-control" ng-model="search">
+        <div class="input-group-btn">
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Search By: {{searchString}} <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a ng-click="setSearch('all', 'All')">Search By All</a></li>
+              <li><a ng-click="setSearch('name', 'Name')">Search By Name</a></li>
+              <li><a ng-click="setSearch('location', 'Location')">Search By Location</a></li>
+              <li><a ng-click="setSearch('description', 'Description')">Search By Description</a></li>
+              <li class="divider"></li>
+              <li><a ng-click="clearSearch()">Clear Search</a></li>
+            </ul>
+        </div>
+    </div>
+  </div>
+  
+  <!-- Single button -->
+  <div class="btn-group pull-right header-controls">
+    <button type="button" class="btn btn-default" data-toggle="dropdown">Sort: {{sortString}}</button>
+    <button ng-click="swapSortDirection()" type="button" class="btn btn-default dropdown-toggle-none" ng-class="{'dropup': sortDesc}">
+        <span class="caret"></span>
+        <span class="sr-only">Change Sort Direction</span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li><a ng-click="setSort('name', 'Name')">Sort By Name</a></li>
+        <li><a ng-click="setSort('location', 'Location')">Sort By Location</a></li>
+        <li><a ng-click="setSort('type', 'Type')">Sort By Type</a></li>
+        <li><a ng-click="setSort('status', 'Status')">Sort By Status</a></li>
+    </ul>
+  </div>
+  
+  <!-- 
+  <button ng-click="addClicked()" class="header-controls btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add</button>
+      -->
+  
 </div>
 
-<div ng-repeat="job in jobs" class="pull-left">
-    <a href="/jobs/view/{{job._id}}">
-        <div class="tile">
-            <div class="job-icon">
-                <i class="fa fa-suitcase"></i>
-            </div>
-            <div class="lab">{{job.name}}</div>
-        </div>
-    </a>
+<div class="row">
+    
+    <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+        <a class="basic-tile-parent" ng-click="addClicked()">
+            <basic-tile mode="add"></basic-tile>
+        </a>
+    </div>
+    
+    <div ng-repeat="job in jobs | megaJobsFilter: {'query': search, 'type': searchMode} | orderBy:sortMode:getSortDesc()" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+        <a href="/jobs/view/{{job._id}}" class="basic-tile-parent">
+            <basic-tile header="job.name" icon="'job'" details="pickRelevant(job)"></basic-tile>
+        </a>
+    </div>
 </div>
