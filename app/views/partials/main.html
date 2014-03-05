@@ -1,7 +1,6 @@
-<div style="text-align: center; margin: 0px auto; margin-top: 20px;" class="m20t">
-    <p class="lead">Welcome to RecruitMe (Blackwood Consulting Recruitment)</p>
-</div>
 
+<h1>Welcome to <b>RecruitMe</b></h1>
+<!--
 <div class="row">
     <div class="col-sm-4">
         <h4>Applicants By University</h2>
@@ -15,69 +14,56 @@
         <h4>GPA By Major</h2>
         <canvas id="MajorGPA" data-type="Bar" width="200" height="200" class="cv"></canvas>
     </div>
-</div> 
-        <!-- 
-<div id="dash-applicants">
-    <h2>Recent Candidates</h2>
+</div>
+-->
+
+<div>
+    <h3>Recent Jobs</h3>
+    <hr style="margin-top: 5px;" />
+
         <div class="row">
-            <div class="tile">
-                <div class="candidate-icon">
-                    <i class="fa fa-user"></i>
-                </div>
-            </div>
-
-            <div class="tile">
-                <div class="candidate-icon">
-                    <i class="fa fa-user"></i>
-                </div>
-            </div>
-
-            <div class="tile">
-                <div class="candidate-icon">
-                    <i class="fa fa-user"></i>
-                </div>
+            <div ng-repeat="job in jobs" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+                <a href="/jobs/view/{{job._id}}" class="basic-tile-parent">
+                    <basic-tile header="job.name" icon="'job'" details="job.location"></basic-tile>
+                </a>
             </div>
         </div>
+
+    <a href="/jobs" class="btn btn-default">View Jobs &#8250;</a>
+
     </div>
 </div>
-<div id="dash-events">
-    <h2>Recent Events</h2>
-    <div class="row">
-        <basic-tile type="'event'" text="'test Text'"></basic-tile>
-        <div class="tile">
-            <div class="event-icon">
-                <i class="fa fa-calendar"></i>
+
+<div>
+    <h3>Recent Candidates</h3>
+    <hr style="margin-top: 5px;" />
+
+        <div class="row">
+            <div ng-repeat="can in candidates" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+                <a href="/candidates/view/{{can._id}}" class="basic-tile-parent">
+                    <basic-tile header="can.firstName + ' ' + can.lastName" icon="'candidate'" details="can.university"></basic-tile>
+                </a>
             </div>
         </div>
-        <div class="tile">
-            <div class="event-icon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
-        <div class="tile">
-            <div class="event-icon">
-                <i class="fa fa-calendar"></i>
-            </div>
-        </div>
+
+        <a href="/candidates" class="btn btn-default">View Candidates &#8250;</a>
+
     </div>
 </div>
-<div id="dash-jobs">
-    <h2>Recent Jobs</h2>
-    <div class="row">
-        <div class="tile">
-            <div class="job-icon">
-                <i class="fa fa-suitcase"></i>
+
+<div class="m20b">
+    <h3>Recent Events</h3>
+    <hr style="margin-top: 5px;" />
+
+        <div class="row">
+            <div ng-repeat="evt in events" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+                <a href="/events/view/{{evt._id}}" class="basic-tile-parent">
+                    <basic-tile header="evt.name" icon="'event'" details="evt.university"></basic-tile>
+                </a>
             </div>
         </div>
-        <div class="tile">
-            <div class="job-icon">
-                <i class="fa fa-suitcase"></i>
-            </div>
-        </div>
-        <div class="tile">
-            <div class="job-icon">
-                <i class="fa fa-suitcase"></i>
-            </div>
-        </div>
+
+        <a href="/events" class="btn btn-default">View Events &#8250;</a>
+
     </div>
-</div>-->
+</div>

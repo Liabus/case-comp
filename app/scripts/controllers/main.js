@@ -5,16 +5,20 @@ angular.module('caseCompApp')
       $scope.jobs = [];
       $scope.candidates = [];
       $scope.events = [];
-      
+
       Jobs.list(function(res){
-          $scope.jobs = res.jobs.slice(0, 2);
+          $scope.jobs = res.jobs.slice(0, 3);
       });
-      
+
       Candidates.list(function(res){
-          $scope.candidates = res.candidates.slice(0, 2);
+          $scope.candidates = res.candidates.slice(0, 3);
       });
-      
-      
+
+      Events.list(function(res){
+          $scope.events = res.events.slice(0, 3);
+      });
+
+
       //Get the context of the canvas element we want to select
       var GPAdata = {
       	labels : ["CS","EE","CE","Business","Finance","Math","Economics"],
@@ -61,9 +65,10 @@ angular.module('caseCompApp')
 
       // code that should be taken care of right away
 
-     
+
           // the code to be called when the dom has loaded
-          var canvas = document.getElementById("MajorGPA");
+          /*
+        var canvas = document.getElementById("MajorGPA");
       	var ctx = canvas.getContext("2d");
       	var MajorGPA = new Chart(ctx).Bar(GPAdata,{scaleShowLabels : false, scaleFontColor : "#767C8D"});
 
@@ -74,10 +79,10 @@ angular.module('caseCompApp')
       	var canvas = document.getElementById("UniOffs");
       	var ctx = canvas.getContext("2d");
       	var MajorGPA = new Chart(ctx).Doughnut(UniAppsData,{scaleShowLabels : false, scaleFontColor : "#767C8D"});
+*/
 
 
-      
-      
+
       /*
       Events.list(function(res){
           $scope.events = res.events.slice(0, 2);
