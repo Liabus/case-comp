@@ -1,0 +1,24 @@
+<img src="images/logo-big-black.png" alt="logo" style="display: block; margin: 0px auto;" width="250">
+<h1 style="display: block; margin: 0px auto; text-align: center;">Blackwood Consulting</h1>
+
+<p style="margin-top: 20px;">
+  {{offer.offerText}}
+</p>
+
+<div style="display: block; margin: 0px auto; text-align: center; margin-top: 20px;" ng-show="!actioned">
+  <button class="btn btn-success btn-lg" ng-click="accept()">Accept Offer</button> <button class="btn btn-danger btn-lg" ng-click="decline()">Decline Offer</button>
+</div>
+
+
+<div style="display: block; margin: 0px auto; text-align: center; margin-top: 20px;" ng-show="actioned">
+  Thank you for responding to the offer. You <strong>{{offer.status}}</strong> the offer.
+  <p ng-show="acc">
+    Thank you for accepting the offer! Your hiring manager will reach out to
+    you shortly regarding moving forward.
+  </p>
+  <p ng-show="dec">
+    We're sorry that you didn't think that the offer was a good fit.
+    You can always email us feedback on our recruitment process, and feel
+    reach out about future employment at Blackwood Consulting.
+  </p>
+</div>

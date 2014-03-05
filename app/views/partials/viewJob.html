@@ -80,22 +80,35 @@
 
              <a ng-click="createOffer()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Create Offer </a>
 
-             <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
+             <div class="job-description" ng-repeat="offer in jobModel.offers | orderBy: '-datetime'">
                  <div class="descript-header">
-                     <p>{{int.type}}<p>
+                     <p>{{offer.candidate.firstName + ' ' + offer.candidate.lastName}}<p>
+                     <button ng-click="editOffer(offer)" class="btn">Edit Offer</button>
                  </div>
                  <div class="descript-content">
+
+                   <!--
                      <div class="descript-row">
                          <div class="desc-left">Date</div>
-                         <div class="desc-right">{{int.datetime}}</div>
+                         <div class="desc-right">{{offer.datetime}}</div>
+                     </div>
+                   -->
+
+                     <div class="descript-row">
+                         <div class="desc-left">Candidate</div>
+                         <div class="desc-right"><a href="/candidates/view/{{offer.candidate._id}}">{{offer.candidate.firstName + ' ' + offer.candidate.lastName}} ({{deArray(offer.candidate.university)}})</a></div>
                      </div>
                      <div class="descript-row">
-                         <div class="desc-left">Interviewer</div>
-                         <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
+                         <div class="desc-left">Offer Text</div>
+                         <div class="desc-right" ng-bind-html="offer.offerText"></div>
                      </div>
                      <div class="descript-row">
-                         <div class="desc-left">Notes</div>
-                         <div class="desc-right">{{int.notes}}</div>
+                         <div class="desc-left">Status</div>
+                         <div class="desc-right" ng-bind="offer.status"></div>
+                     </div>
+                     <div class="descript-row">
+                         <div class="desc-left">Offer URL</div>
+                         <div class="desc-right"><a href="/offers/{{offer._id}}">View Offer</a></div>
                      </div>
                  </div>
              </div>

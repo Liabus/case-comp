@@ -27,6 +27,8 @@ angular.module('caseCompApp')
               Jobs.get({id: $routeParams.id}, function(res){
                   NProgress.done();
 
+                  console.log(res);
+
                   _.each(res.applicants, function(app){
                     app.statusInt = 1;
                     if(app.status.toLowerCase() === 'rejected'){
@@ -171,7 +173,6 @@ angular.module('caseCompApp')
 
 
       $scope.editApplicant = function(app){
-        console.log(app);
         NProgress.start();
 
         var modalInstance = $modal.open({
@@ -258,7 +259,6 @@ angular.module('caseCompApp')
       };
 
 
-
       $scope.createOffer = function(){
           NProgress.start();
 
@@ -267,7 +267,69 @@ angular.module('caseCompApp')
               controller: 'ModalController',
               resolve: {
                   'ForcedData': function(){
-                      return {};
+                      return {
+                        title: 'Job Offer',
+                        mode: 'JO',
+                        noedit: true,
+                        edit: false,
+                        //Defaults, basically:
+                        defaultData: {
+                          status: 'Sent',
+                          emailToCandidate: true,
+                          changeJobStatus: true,
+                          autoReject: true,
+                          emailRejected: true
+                        },
+                        upload: function(model, callback){
+                          var modelClone = _.cloneDeep(model);
+
+                          modelClone.candidateEmail = model.candidate.email;
+                          modelClone.candidate = model.candidate._id;
+                          modelClone.job = $scope.jobModel._id;
+
+                          Jobs.offer(modelClone, function(a, b){
+                            callback();
+                          });
+                        }
+                      };
+                  }
+              }
+          });
+
+          modalInstance.result.then(function (selectedItem) {
+            updateData();
+          }, function () {
+              //console.log('Modal dismissed at: ' + new Date());
+          });
+      };
+
+      $scope.editOffer = function(offer){
+          NProgress.start();
+
+          var modalInstance = $modal.open({
+              templateUrl: 'partials/addJobOffer.html',
+              controller: 'ModalController',
+              resolve: {
+                  'ForcedData': function(){
+                      return {
+                        title: 'Job Offer',
+                        mode: 'JO',
+                        noedit: true,
+                        edit: true,
+                        //Defaults, basically:
+                      defaultData: _.cloneDeep(offer),
+                        upload: function(model, callback){
+                          var modelClone = _.cloneDeep(model);
+
+                          modelClone.candidateEmail = model.candidate.email;
+                          modelClone.candidate = model.candidate._id;
+                          modelClone.job = $scope.jobModel._id;
+
+                          Jobs.offer(modelClone, function(a, b){
+                            callback();
+                          });
+                        }
+                      };
                   }
               }
           });

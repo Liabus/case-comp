@@ -59,6 +59,10 @@ angular.module('caseCompApp')
 
             _.extend($scope.model, ForcedData.mixin || {});
 
+            if(ForcedData.prepare){
+              ForcedData.prepare($scope.model);
+            }
+
             if(ForcedData.upload){
                 ForcedData.upload($scope.model, function(){
                     NProgress.done();
@@ -107,6 +111,8 @@ angular.module('caseCompApp')
         $scope.cancel = function(){
             $modalInstance.dismiss('cancel');
         }
+
+
         $scope.inputUniversities = {
             multiple: true,
             simple_tags: true,

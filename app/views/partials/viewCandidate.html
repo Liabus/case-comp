@@ -1,5 +1,5 @@
   <div id="jobs-top">
-      
+
       <div class="btn-group pull-right">
         <button type="button" class="btn btn-primary" ng-click="addClicked()">Edit {{applicants ? 'Applicant' : 'Candidate'}}</button>
         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
@@ -14,13 +14,13 @@
           <li><a ng-click="deleteClicked()">Delete {{applicants ? 'Applicant' : 'Candidate'}}</a></li>
         </ul>
       </div>
-      
+
       <button type="button" class="btn btn-default pull-right" style="margin-right: 10px;" ng-click="upgradeCandidate()" ng-show="applicants">Upgrade To Candidate</button>
-      
+
       <h1>{{um.firstName + ' ' + um.lastName}}</h1>
       <h5>{{deArray(um.major)}}&nbsp;&nbsp;&nbsp;–&nbsp;&nbsp;&nbsp;{{deArray(um.university)}}</h5>
   </div>
-  
+
 <tabset>
     <tab heading="Details">
         <div class="job-description">
@@ -33,12 +33,12 @@
                       <div class="desc-left">Name</div>
                       <div class="desc-right">{{um.firstName + ' ' + um.lastName}}</div>
                   </div>
-          
+
                   <div class="descript-row clearfix">
                       <div class="desc-left">Email</div>
                       <div class="desc-right">{{um.email}}</div>
                   </div>
-          
+
                   <div class="descript-row clearfix">
                       <div class="desc-left">Phone</div>
                       <div class="desc-right">{{formatPhone(um.phone)}}</div>
@@ -47,22 +47,22 @@
                       <div class="desc-left">Address</div>
                       <div class="desc-right">{{um.address}}</div>
                   </div>
-          
+
                   <div class="descript-row clearfix">
                       <div class="desc-left">University</div>
                       <div class="desc-right">{{deArray(um.university)}}</div>
                   </div>
-          
+
                   <div class="descript-row clearfix">
                       <div class="desc-left">Major</div>
                       <div class="desc-right">{{deArray(um.major)}}</div>
                   </div>
-                  
+
                   <div class="descript-row clearfix">
                       <div class="desc-left">Minor</div>
                       <div class="desc-right">{{deArray(um.minor)}}</div>
                   </div>
-          
+
                   <div class="descript-row clearfix">
                       <div class="desc-left">GPA</div>
                       <div class="desc-right">{{um.GPA}}</div>
@@ -86,9 +86,9 @@
 
 <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
        <div>
-           
+
            <a ng-click="showInterview()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add Interview </a>
-     
+
            <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
                <div class="descript-header">
                    <p>{{int.type}}<p>
@@ -108,17 +108,17 @@
                    </div>
                </div>
            </div>
-     
+
        </div>
     </tab>
-    
+
     <tab heading="Jobs" ng-show="!applicants">
 
 <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
        <div>
-           
+
            <a ng-click="addToJob()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Job </a>
-     
+
            <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
                <div class="descript-header">
                    <p>{{int.type}}<p>
@@ -138,7 +138,37 @@
                    </div>
                </div>
            </div>
-     
+
+       </div>
+    </tab>
+
+    <tab heading="Events" ng-show="!applicants">
+
+<!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
+       <div>
+
+           <a ng-click="addToJob()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Job </a>
+
+           <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
+               <div class="descript-header">
+                   <p>{{int.type}}<p>
+               </div>
+               <div class="descript-content">
+                   <div class="descript-row">
+                       <div class="desc-left">Date</div>
+                       <div class="desc-right">{{int.datetime}}</div>
+                   </div>
+                   <div class="descript-row">
+                       <div class="desc-left">Interviewer</div>
+                       <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
+                   </div>
+                   <div class="descript-row">
+                       <div class="desc-left">Notes</div>
+                       <div class="desc-right">{{int.notes}}</div>
+                   </div>
+               </div>
+           </div>
+
        </div>
     </tab>
 </tabset>

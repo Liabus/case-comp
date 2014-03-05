@@ -193,6 +193,9 @@ angular.module('caseCompApp')
               resolve: {
                   'ForcedData': function(){
                       return {
+                          prepare: function(model){
+                            model.GPA = (parseInt((model.GPA + '000').substring(0, 3)) / 100);
+                          },
                           mixin: mixin
                       };
                   }

@@ -17,7 +17,12 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "SignupCtrl",
         authenticate: true
     })
-    
+
+    .when("/offers/:view?/:id", {
+        templateUrl: "partials/publicOfferView",
+        controller: "offersController"
+    })
+
     .when("/settings/user", {
         templateUrl: "partials/settings",
         controller: "SettingsCtrl",
@@ -28,13 +33,13 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "SettingsCtrl",
         authenticate: true
     })
-    
+
     .when("/analytics", {
         templateUrl: "partials/analytics",
         controller: "analyticsController",
         authenticate: true
     })
-    
+
     .when("/jobs", {
         templateUrl: "partials/jobs",
         controller: "jobsController",
@@ -52,7 +57,7 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "jobsController",
         authenticate: true
     })
-    
+
     .when("/events", {
         templateUrl: "partials/events",
         controller: "eventsController",
@@ -74,7 +79,7 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "eventsController",
         authenticate: true
     })
-    
+
     .when("/candidates", {
         templateUrl: "partials/candidates",
         controller: "candidatesController",
@@ -96,7 +101,7 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "candidatesController",
         authenticate: true
     })
-    
+
     .when("/applicants", {
         templateUrl: "partials/candidates",
         controller: "candidatesController",
@@ -106,12 +111,12 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "candidatesController",
         authenticate: true
     })
-    
+
     .otherwise({
         redirectTo: "/dashboard"
     });
-    
-    
+
+
     $locationProvider.html5Mode(true);
     $httpProvider.interceptors.push([ "$q", "$location", function($q, $location) {
         return {
@@ -125,7 +130,7 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
             }
         };
     } ]);
-    
+
 }).run(function($rootScope, $location, Auth) {
     $rootScope.$on("$routeChangeStart", function(event, next) {
         if (next.authenticate && !Auth.isLoggedIn()) {
@@ -133,6 +138,11 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         } else if(next.reverseAuthenticate && Auth.isLoggedIn()) {
             $location.path("/dashboard");
         } else {
+            if($location.path().split('/')[1] === 'offers'){
+              $rootScope.offerViewer = true;
+            }else{
+              $rootScope.offerViewer = false;
+            }
             NProgress.start();
         }
     });

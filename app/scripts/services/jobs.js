@@ -19,6 +19,20 @@ angular.module('caseCompApp')
             }
         },
 
+        offer: {
+          method: 'POST',
+          params: {
+            id: 'offer'
+          }
+        },
+
+        viewOffer: {
+          method: 'GET',
+          params: {
+            id: 'offer'
+          }
+        },
+
         update: {
             method: 'PUT',
             params: {}
