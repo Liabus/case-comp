@@ -34,6 +34,8 @@ angular.module('caseCompApp')
               dataSet.get({id: $routeParams.id}, function(res){
                   NProgress.done();
 
+                  console.log(res);
+
                   if(res.applicant && !$scope.applicants){
                     $location.path('/applicants/view/' + res._id);
                   }else if(!res.applicant && $scope.applicants){
@@ -194,7 +196,9 @@ angular.module('caseCompApp')
                   'ForcedData': function(){
                       return {
                           prepare: function(model){
-                            model.GPA = (parseInt((model.GPA + '000').substring(0, 3)) / 100);
+                            if(model.GPA > 9){
+                              model.GPA = (parseInt( ( (model.GPA + '000').substring(0, 3)))) / 100;
+                            }
                           },
                           mixin: mixin
                       };
@@ -232,17 +236,7 @@ angular.module('caseCompApp')
           });
 
           modalInstance.result.then(function (resAction) {
-              if(resAction === 'yes'){
-                  NProgress.start();
-                  dataSet.delete({id: $routeParams.id}, function(res){
-                      NProgress.done();
-                      $location.path('/candidates');
-                  }, function(err){
-                      console.log(err);
-                      NProgress.done();
-                      alert('An unknown error occured while deleting the candidate.');
-                  });
-              }
+              updateData();
           }, function () {
               //Nope.
           });

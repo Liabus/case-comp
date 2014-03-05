@@ -26,6 +26,7 @@ angular.module('caseCompApp')
     $scope.accept = function(){
       $scope.actioned = true;
       $scope.acc = true;
+      $scope.offer.status = 'Accepted';
       Jobs.get({id: 'offerStatus', offer: $routeParams.id, status: 'Accepted'}, function(a, b){
         // :)
       });
@@ -34,6 +35,7 @@ angular.module('caseCompApp')
     $scope.decline = function(){
       $scope.actioned = true;
       $scope.dec = true;
+      $scope.offer.status = 'Declined';
       Jobs.get({id: 'offerStatus', offer: $routeParams.id, status: 'Declined'}, function(a, b){
         // :(
       });

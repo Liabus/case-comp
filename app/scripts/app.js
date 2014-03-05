@@ -144,6 +144,9 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
               $rootScope.offerViewer = false;
             }
             NProgress.start();
+            
+            if($('.navbar-collapse').hasClass('in'))
+              $('.navbar-toggle').click();
         }
     });
     $rootScope.$on("$routeChangeSuccess", function() {

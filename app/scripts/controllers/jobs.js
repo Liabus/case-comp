@@ -31,7 +31,9 @@ angular.module('caseCompApp')
 
                   _.each(res.applicants, function(app){
                     app.statusInt = 1;
-                    if(app.status.toLowerCase() === 'rejected'){
+                    if(app.status.toLowerCase() === 'declined'){
+                      app.statusInt = 0;
+                    }else if(app.status.toLowerCase() === 'rejected'){
                       app.statusInt = -1;
                     }else if(app.status.toLowerCase() === 'offered'){
                       app.statusInt = 2;
@@ -159,7 +161,11 @@ angular.module('caseCompApp')
               controller: 'ModalController',
               resolve: {
                   'ForcedData': function(){
-                      return {};
+                      return {
+                        restore: function(model){
+                          model.visibility = model.visible ? 'Public' : 'Private';
+                        }
+                      };
                   }
               }
           });
@@ -278,7 +284,10 @@ angular.module('caseCompApp')
                           emailToCandidate: true,
                           changeJobStatus: true,
                           autoReject: true,
-                          emailRejected: true
+                          emailRejected: true,
+                          //Eventually pull these from a DB:
+                          rejectedEmailText: 'We are sorry to inform you that we are currently unable to offer you a position at our firm. Thank you for your time and interest.',
+                          offerText: 'Congratulations, we are happy to offer you a position at our firm. Please indicate whether or not you accept our offer.'
                         },
                         upload: function(model, callback){
                           var modelClone = _.cloneDeep(model);

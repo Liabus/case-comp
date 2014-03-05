@@ -52,6 +52,10 @@
                         <div class="desc-left">Description</div>
                         <div class="desc-right long">{{jobModel.description}}</div>
                     </div>
+                    <div class="descript-row clearfix">
+                        <div class="desc-left">Visibility</div>
+                        <div class="desc-right long">{{jobModel.visible ? 'Public': 'Private'}}</div>
+                    </div>
                 </div>
             </div>
       </tab>
@@ -65,7 +69,7 @@
              <div class="row">
                  <div ng-repeat="app in jobModel.applicants | orderBy: ['-statusInt', '-candidate.name']" ng-class="{'col-xs-12 col-sm-12 col-md-12': app.statusInt >= 2, 'col-xs-12 col-sm-6 col-md-4 col-xl-3': app.statusInt < 2}" class="basic-tile-list">
                      <a href="/candidates/view/{{app.candidate._id}}" class="basic-tile-parent">
-                         <basic-tile edit="'true'" edited="editApplicant(app)" ng-class="{'filled': app.status === 'Rejected'}" header="app.candidate.firstName + ' ' + app.candidate.lastName" icon="'candidate'" details="app.status"></basic-tile>
+                         <basic-tile edit="'true'" edited="editApplicant(app)" ng-class="{'filled': app.statusInt < 1}" header="app.candidate.firstName + ' ' + app.candidate.lastName" icon="'candidate'" details="app.status"></basic-tile>
                      </a>
                  </div>
              </div>
@@ -94,21 +98,21 @@
                      </div>
                    -->
 
-                     <div class="descript-row">
+                     <div class="descript-row clearfix">
                          <div class="desc-left">Candidate</div>
                          <div class="desc-right"><a href="/candidates/view/{{offer.candidate._id}}">{{offer.candidate.firstName + ' ' + offer.candidate.lastName}} ({{deArray(offer.candidate.university)}})</a></div>
                      </div>
-                     <div class="descript-row">
+                     <div class="descript-row clearfix">
                          <div class="desc-left">Offer Text</div>
-                         <div class="desc-right" ng-bind-html="offer.offerText"></div>
+                         <div class="desc-right long" ng-bind-html="offer.offerText"></div>
                      </div>
-                     <div class="descript-row">
+                     <div class="descript-row clearfix">
                          <div class="desc-left">Status</div>
                          <div class="desc-right" ng-bind="offer.status"></div>
                      </div>
-                     <div class="descript-row">
+                     <div class="descript-row clearfix">
                          <div class="desc-left">Offer URL</div>
-                         <div class="desc-right"><a href="/offers/{{offer._id}}">View Offer</a></div>
+                         <div class="desc-right"><a target="_blank" href="/offers/{{offer._id}}">View Offer</a></div>
                      </div>
                  </div>
              </div>

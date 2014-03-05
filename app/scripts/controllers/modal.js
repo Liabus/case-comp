@@ -24,6 +24,8 @@ angular.module('caseCompApp')
             data.get({id: $routeParams.id}, function(res){
                 NProgress.done();
                 $scope.model = res;
+                if(ForcedData.restore)
+                  ForcedData.restore($scope.model);
             }, function(){
                 NProgress.done();
                 //not found:

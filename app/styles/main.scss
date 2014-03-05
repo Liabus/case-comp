@@ -96,11 +96,15 @@ body {
  */
 
 /* Hide for mobile, show later */
-.sidebar {
-  display: none;
+
+@media (max-width: 768px) {
+  #sidebar {
+    display: none !important;
+  }
 }
+
 @media (min-width: 768px) {
-  .sidebar {
+  #sidebar {
     position: fixed;
     top: 51px;
     bottom: 0;
@@ -471,6 +475,7 @@ a {
 	padding-top: 10px;
 	padding-left: 7px;
 	padding-right: 5px;
+  padding-bottom: 7px;
 	min-height: 40px;
 	border-bottom: 1px solid #dfdfdf;
 }
@@ -484,8 +489,6 @@ a {
 .desc-right {
 	width: 75%;
 	float: right;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 
 .tile {
