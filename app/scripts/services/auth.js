@@ -2,7 +2,7 @@
 
 angular.module('caseCompApp')
   .factory('Auth', function Auth($location, $rootScope, Session, User, $cookieStore) {
-    
+
     // Get currentUser from cookie
     $rootScope.currentUser = $cookieStore.get('user') || null;
     $cookieStore.remove('user');
@@ -11,10 +11,10 @@ angular.module('caseCompApp')
 
       /**
        * Authenticate user
-       * 
+       *
        * @param  {Object}   user     - login info
        * @param  {Function} callback - optional
-       * @return {Promise}            
+       * @return {Promise}
        */
       login: function(user, callback) {
         var cb = callback || angular.noop;
@@ -32,9 +32,9 @@ angular.module('caseCompApp')
 
       /**
        * Unauthenticate user
-       * 
+       *
        * @param  {Function} callback - optional
-       * @return {Promise}           
+       * @return {Promise}
        */
       logout: function(callback) {
         var cb = callback || angular.noop;
@@ -50,10 +50,10 @@ angular.module('caseCompApp')
 
       /**
        * Create a new user
-       * 
+       *
        * @param  {Object}   user     - user info
        * @param  {Function} callback - optional
-       * @return {Promise}            
+       * @return {Promise}
        */
       createUser: function(user, callback) {
         var cb = callback || angular.noop;
@@ -70,16 +70,17 @@ angular.module('caseCompApp')
 
       /**
        * Change password
-       * 
-       * @param  {String}   oldPassword 
-       * @param  {String}   newPassword 
+       *
+       * @param  {String}   oldPassword
+       * @param  {String}   newPassword
        * @param  {Function} callback    - optional
-       * @return {Promise}              
+       * @return {Promise}
        */
       changePassword: function(oldPassword, newPassword, callback) {
         var cb = callback || angular.noop;
 
         return User.update({
+          id: 'pass',
           oldPassword: oldPassword,
           newPassword: newPassword
         }, function(user) {
@@ -89,9 +90,22 @@ angular.module('caseCompApp')
         }).$promise;
       },
 
+      changeName: function(name, callback){
+        var cb = callback || angular.noop;
+
+        return User.update({
+          id: 'name',
+          name: name
+        }, function(user) {
+          return cb(user);
+        }, function(err) {
+          return cb(err);
+        }).$promise;
+      },
+
       /**
        * Gets all available info on authenticated user
-       * 
+       *
        * @return {Object} user
        */
       currentUser: function() {
@@ -100,7 +114,7 @@ angular.module('caseCompApp')
 
       /**
        * Simple check to see if a user is logged in
-       * 
+       *
        * @return {Boolean}
        */
       isLoggedIn: function() {
