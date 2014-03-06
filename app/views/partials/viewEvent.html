@@ -71,9 +71,15 @@
   <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
          <div>
 
-             <a ng-click="addClicked()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add Attendee </a>
+            <a ng-click="addClicked()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add Attendee </a>
 
-
+            <div class="row">
+                <div ng-repeat="app in um.attendees | orderBy: ['-app.name']" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+                    <a href="/candidates/view/{{app._id}}" class="basic-tile-parent">
+                        <basic-tile header="app.firstName + ' ' + app.lastName" icon="'candidate'" details="app.university"></basic-tile>
+                    </a>
+                </div>
+            </div>
 
          </div>
       </tab>

@@ -22,6 +22,17 @@ angular.module('caseCompApp')
         if($routeParams.id && !ForcedData.noedit){
             $scope.edit = true;
             data.get({id: $routeParams.id}, function(res){
+
+                if(mode === 'events'){
+                  _.each(res.attendees, function(a){
+                    a.id = a._id;
+                  });
+                  _.each(res.hosts, function(h){
+                    h.id = h._id;
+                    h.text = h.name;
+                  });
+                }
+
                 NProgress.done();
                 $scope.model = res;
                 if(ForcedData.restore)
@@ -208,10 +219,11 @@ angular.module('caseCompApp')
         };
 
         $scope.queryCandidateOptions = {
-            multiple: ForcedData.usersMultiple || false,
+            multiple: true || false,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: '/api/candidates/search',
                 data: function (term) {
+                  console.log(term);
                     return {
                         q: term // search term
                     };
