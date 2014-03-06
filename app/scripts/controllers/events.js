@@ -155,6 +155,38 @@ angular.module('caseCompApp')
       }
 
 
+      $scope.deleteClicked = function(){
+          var modalInstance = $modal.open({
+            templateUrl: 'partials/deleteModal.html',
+            controller: 'DeleteModalController',
+            resolve: {
+              type: function () {
+                  return 'Event';
+              },
+              name: function () {
+                  return $scope.um.name;
+              }
+            }
+          });
+
+          modalInstance.result.then(function (resAction) {
+              if(resAction === 'yes'){
+                  NProgress.start();
+                  Events.delete({id: $routeParams.id}, function(res){
+                      NProgress.done();
+                      $location.path('/events');
+                  }, function(err){
+                      console.log(err);
+                      NProgress.done();
+                      alert('An unknown error occured while deleting the event.');
+                  });
+              }
+          }, function () {
+              //Nope.
+          });
+      }
+
+
 
 
 

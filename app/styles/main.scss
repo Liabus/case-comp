@@ -16,6 +16,16 @@ body {
   display: inherit !important;
 }
 
+.dynChart {
+  width: 100% !important;
+  height: 300px;
+}
+
+.ac-legend td {
+  padding-left: 5px;
+  padding-bottom: 5px;
+}
+
 .navbar-brand {
   span {
     transition: all 0.5s ease;
