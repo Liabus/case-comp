@@ -53,7 +53,58 @@ angular.module('caseCompApp')
       }
     };
 
+    $scope.offersBySchool = {
+      config: {
+        title : '',
+        tooltips: false,
+        labels : false,
+        legend: {
+          display: true,
+          //could be 'left, right'
+          position: 'right'
+        }
+      },
+      data: {
+        series: [],
+        data : []
+      }
+    };
 
+    Jobs.list(function(res){
+      var jdata = {};
+      _.each(res.jobs, function(job){
+        _.each(job.offers, function(offer){
+          _.each(offer.candidate.university, function(uni){
+            if(!jdata[uni]){
+              jdata[uni] = 0;
+            }
+            jdata[uni]++;
+          });
+        });
+      });
+
+      var jobData = _.pairs(jdata);
+
+      jobData.sort(function(a, b){
+        if(a[1] > b[1]){
+          return -1;
+        }else if(a[1] === b[1]){
+          return 0;
+        }else{
+          return 1;
+        }
+      });
+
+      var obs = $scope.offersBySchool.data;
+      _.each(jobData, function(dat){
+        obs.series.push(dat[0]);
+        obs.data.push({
+          x: dat[0],
+          y: [dat[1]]
+        });
+      });
+
+    });
 
 
 

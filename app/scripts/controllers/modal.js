@@ -219,11 +219,10 @@ angular.module('caseCompApp')
         };
 
         $scope.queryCandidateOptions = {
-            multiple: true || false,
+            multiple: ForcedData.usersMultiple || false,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: '/api/candidates/search',
                 data: function (term) {
-                  console.log(term);
                     return {
                         q: term // search term
                     };
