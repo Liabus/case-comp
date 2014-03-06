@@ -218,12 +218,11 @@ angular.module('caseCompApp')
                 },
                 results: function (data) { // parse the results into the format expected by Select2.
                     // since we are using custom formatting functions we do not need to alter remote JSON data
-
+                    _.each(data.candidates, function(can){
+                      can.id = can._id;
+                    });
                     return {results: data.candidates};
                 }
-            },
-            id: function(can){
-              return {id: can._id};
             },
             formatResult: function(can) {
                 var markup = "<div class='candidate-search-result'>";

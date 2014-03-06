@@ -1,13 +1,13 @@
 <div class="page-header clearfix">
-    
+
   <h2 class="pull-left hidden-sm">{{applicants ? 'Applicants' : 'Candidates'}}</h2>
-  
+
   <div class="header-controls pull-left">
     <div class="input-group" style="max-width: 400px;">
         <span class="input-group-addon">
             <span class="fa fa-search"></span>
         </span>
-        <input type="search" placeholder="Search Candidates..." class="form-control" ng-model="search">
+        <input type="search" placeholder="Search {{applicants ? 'Applicants' : 'Candidates'}}..." class="form-control" ng-model="search">
         <div class="input-group-btn">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Search By: {{searchString}} <span class="caret"></span></button>
             <ul class="dropdown-menu">
@@ -23,7 +23,7 @@
         </div>
     </div>
   </div>
-  
+
   <!-- Single button -->
   <div class="btn-group pull-right header-controls">
     <button type="button" class="btn btn-default" data-toggle="dropdown">Sort: {{sortString}}</button>
@@ -39,21 +39,21 @@
         <li><a ng-click="setSort('GPA', 'GPA', true)">Sort By GPA</a></li>
     </ul>
   </div>
-  
-  <!-- 
+
+  <!--
   <button ng-click="addClicked()" class="header-controls btn btn-primary pull-right"><span class="glyphicon glyphicon-plus"></span> Add</button>
       -->
-  
+
 </div>
 
 <div class="row">
-    
+
     <div class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
         <a class="basic-tile-parent" ng-click="addClicked()">
             <basic-tile mode="add"></basic-tile>
         </a>
     </div>
-    
+
     <div ng-repeat="candidate in candidates | megaFilter: {'query': search, 'type': searchMode} | orderBy:sortMode:getSortDesc()" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
         <a href="/{{applicants ? 'applicants' : 'candidates'}}/view/{{candidate._id}}" class="basic-tile-parent">
             <basic-tile header="candidate.firstName + ' ' + candidate.lastName" icon="'candidate'" details="pickRelevant(candidate)"></basic-tile>
