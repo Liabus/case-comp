@@ -18,9 +18,11 @@ angular.module('caseCompApp')
           //console.log('uploading....')
         };
         $scope.uploadComplete = function (content) {
+          console.log(content);
           content = JSON.parse(content || '');
           if(content.url){
             $scope.model.resumeUrl = content.url;
+            alert('Resume has been uploaded and added to the candidate.');
           }
         }
 

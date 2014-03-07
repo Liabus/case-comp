@@ -79,6 +79,10 @@
                       <div class="desc-left">Skills</div>
                       <div class="desc-right long">{{um.skills}}</div>
                   </div>
+                  <div class="descript-row clearfix" ng-show="resumeUrl">
+                      <div class="desc-left">Resume</div>
+                      <div class="desc-right long"> <a href="{{resumeUrl}}" target="_blank">Click To View</a> </div>
+                  </div>
               </div>
           </div>
 
@@ -116,18 +120,22 @@
 
            <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
                <div class="descript-header">
-                   <p>{{int.type}}<p>
+                   <p>Interview<p>
                </div>
                <div class="descript-content">
-                   <div class="descript-row">
+                   <div class="descript-row clearfix">
+                       <div class="desc-left">Type</div>
+                       <div class="desc-right">{{int.type}}</div>
+                   </div>
+                   <div class="descript-row clearfix">
                        <div class="desc-left">Date</div>
                        <div class="desc-right">{{int.datetime}}</div>
                    </div>
-                   <div class="descript-row">
+                   <div class="descript-row clearfix">
                        <div class="desc-left">Interviewer</div>
                        <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
                    </div>
-                   <div class="descript-row">
+                   <div class="descript-row clearfix">
                        <div class="desc-left">Notes</div>
                        <div class="desc-right">{{int.notes}}</div>
                    </div>
@@ -160,25 +168,13 @@
 <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
        <div>
 
-           <a ng-click="addToJob()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Job </a>
+           <a ng-click="addToEvent()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Event </a>
 
-           <div class="job-description" ng-repeat="int in um.interview | orderBy: '-datetime'">
-               <div class="descript-header">
-                   <p>{{int.type}}<p>
-               </div>
-               <div class="descript-content">
-                   <div class="descript-row">
-                       <div class="desc-left">Date</div>
-                       <div class="desc-right">{{int.datetime}}</div>
-                   </div>
-                   <div class="descript-row">
-                       <div class="desc-left">Interviewer</div>
-                       <div class="desc-right">{{int.interviewer.name}} ({{int.interviewer.email}})</div>
-                   </div>
-                   <div class="descript-row">
-                       <div class="desc-left">Notes</div>
-                       <div class="desc-right">{{int.notes}}</div>
-                   </div>
+           <div class="row">
+               <div ng-repeat="evt in um.events | orderBy: '-name'" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
+                   <a href="/events/view/{{evt._id}}" class="basic-tile-parent">
+                       <basic-tile header="evt.name" icon="'event'" details="evt.university"></basic-tile>
+                   </a>
                </div>
            </div>
 
