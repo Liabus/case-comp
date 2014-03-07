@@ -1,8 +1,25 @@
 'use strict';
 
 angular.module('caseCompApp')
-  .controller('SettingsCtrl', function ($scope, User, Auth) {
+  .controller('SettingsCtrl', function ($scope, $routeParams, $rootScope, User, Auth) {
     $scope.errors = {};
+    $scope.Nerrors = {};
+
+    $scope.user = {};
+
+    $scope.user.newName = $rootScope.currentUser.name;
+
+    //Direct to a page:
+    if($routeParams.page){
+      //TODO
+    }
+
+    $scope.users = [];
+
+    User.get({id: 'list'}, function(res){
+      $scope.users = res.users;
+    });
+
 
     $scope.changePassword = function(form) {
       $scope.submitted = true;
@@ -18,4 +35,22 @@ angular.module('caseCompApp')
         });
       }
 		};
+
+    $scope.changeName = function(form) {
+      $scope.Nsubmitted = true;
+
+      var nname = $scope.user.newName;
+      
+      if(form.$valid) {
+        Auth.changeName(nname)
+        .then( function() {
+          $scope.Nmessage = 'Name successfully changed.';
+          $rootScope.currentUser.name = nname;
+        })
+        .catch( function() {
+          form.name.$setValidity('mongoose', false);
+          $scope.Nerrors.other = 'Name rejected by server.';
+        });
+      }
+    };
   });

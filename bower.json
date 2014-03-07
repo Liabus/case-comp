@@ -21,7 +21,8 @@
     "angular-ui-utils": "bower-mask",
     "moment": "~2.5.1",
     "chrono": "~0.1.9",
-    "angular-charts": "~0.0.1"
+    "angular-charts": "~0.0.1",
+    "ngUpload": "0.5.8"
   },
   "devDependencies": {
     "angular-mocks": "1.2.6",

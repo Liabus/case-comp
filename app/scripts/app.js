@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRoute", "ui.bootstrap", "ui.select2", "ui.mask", "angularCharts" ]).config(function($routeProvider, $locationProvider, $httpProvider) {
+angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRoute", "ui.bootstrap", "ui.select2", "ui.mask", "angularCharts", "ngUpload" ]).config(function($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider.when("/", {
         redirectTo: "/dashboard",
         authenticate: true
@@ -23,13 +23,8 @@ angular.module("caseCompApp", [ "ngCookies", "ngResource", "ngSanitize", "ngRout
         controller: "offersController"
     })
 
-    .when("/settings/user", {
+    .when("/settings/:page?", {
         templateUrl: "partials/settings",
-        controller: "SettingsCtrl",
-        authenticate: true
-    })
-    .when("/settings/user", {
-        templateUrl: "partials/settingsUser",
         controller: "SettingsCtrl",
         authenticate: true
     })

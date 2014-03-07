@@ -81,6 +81,31 @@
                   </div>
               </div>
           </div>
+
+
+          <div class="job-description" ng-show="um.linkedinLink || um.githubLink || um.twitterLink">
+                <div class="descript-header">
+                    <p>Social Media<p>
+                    <!-- <button ng-click="addClicked()" class="btn">Edit</button> -->
+                </div>
+                <div class="descript-content">
+                    <div class="descript-row clearfix" ng-show="um.linkedinLink">
+                        <div class="desc-left">LinkedIn Profile</div>
+                        <div class="desc-right"> <a href="http://linkedin.com/in/{{um.linkedinLink}}">http://linkedin.com/in/{{um.linkedinLink}}</a> </div>
+                    </div>
+
+                    <div class="descript-row clearfix" ng-show="um.githubLink">
+                        <div class="desc-left">Github Profile</div>
+                        <div class="desc-right"> <a href="http://github.com/{{um.githubLink}}">http://github.com/{{um.githubLink}}</a> </div>
+                    </div>
+
+                    <div class="descript-row clearfix" ng-show="um.twitterLink">
+                        <div class="desc-left">Twitter Profile</div>
+                        <div class="desc-right"> <a href="http://twitter.com/{{um.twitterLink}}">http://twitter.com/{{um.twitterLink}}</a> </div>
+                    </div>
+                </div>
+            </div>
+
     </tab>
     <tab heading="Interviews" ng-show="!applicants">
 

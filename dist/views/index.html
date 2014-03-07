@@ -1,0 +1,134 @@
+<!doctype html>
+
+
+<!--
+
+    Developed by Liabus, LLC.
+
+        Jordan on being a Jabrone:
+            "It's the best thing ever!
+            Jabrones for life.
+            I Jabrone, you Jabrone, he/she/it Jabrones.
+            Jabronology, the study of Jabron."
+
+-->
+
+
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <base href="/">
+    <title>Blackwood Consulting - RecruitMe</title>
+    <meta name="author" content="Liabus">
+    <meta name="description" content="A simple tool developed by Liabus for Blackwood Consulting.">
+    <meta name="viewport" content="initial-scale=1.2, user-scalable=no">
+
+    <!-- Run in full-screen mode. -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+
+    <!-- Make the status bar black with white text. -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Customize home screen title. -->
+    <meta name="apple-mobile-web-app-title" content="RecruitMe">
+
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <link rel="stylesheet" href="styles/c2572dae.vendor.css"/>
+    <link rel="stylesheet" href="styles/b8add3d7.main.css"/>
+
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Pontano+Sans" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet" type="text/css">
+  </head>
+  <body ng-app="caseCompApp">
+
+    <!-- Add your site or application content here -->
+    <div class="navbar navbar-inverse navbar-fixed-top ov-hide" ng-class="{'ov-show': !offerViewer}" role="navigation" ng-controller="NavbarCtrl">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="navbar-brand" href="/"><img src="images/5bc5250e.logo.png"><span>RecruitMe</span></a>
+        </div>
+        <div class="navbar-collapse collapse">
+
+            <!-- Responsive Menu -->
+            <ul class="nav navbar-nav navbar-left visible-xs resp-nav">
+              <li><a href="/settings">Dashboard</a></li>
+              <li><a href="/candidates">Candidates</a></li>
+              <li><a href="/jobs">Jobs</a></li>
+              <li><a href="/events">Events</a></li>
+              <li><a href="/analytics">Analytics</a></li>
+              <li><a href="/settings">Settings</a></li>
+            </ul>
+
+          <ul class="nav navbar-nav navbar-right" ng-show="user.name">
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <span ng-bind="user.name"></span> <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/settings/user">User Settings</a></li>
+                  <li class="divider"></li>
+                  <li><a href="#" ng-click="logout()">Logout</a></li>
+                </ul>
+              </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div id="sidebar" class="col-sm-3 col-md-2 sidebar ov-hide" ng-controller="NavbarCtrl" ng-class="{'ov-show': !offerViewer}">
+          <ul class="nav nav-sidebar">
+            <li class="sidebar-nav-item" ng-class="{active: isActive('dashboard')}"><a href="/dashboard"><i class="fa fa-tachometer" id="side-dashboard"></i> Dashboard</a></li>
+            <li class="sidebar-nav-item" ng-class="{active: isActive('jobs')}" id="side-jobs"><a href="/jobs"><i class="fa fa-suitcase"></i> Jobs</a></li>
+            <li class="sidebar-nav-item" ng-class="{active: isActive('candidates')}" id="side-candidates"><a href="/candidates"><i class="fa fa-users"></i> Candidates</a></li>
+
+             <li class="sidebar-nav-item" ng-class="{active: isActive('applicants')}" id="side-applicants"><a href="/applicants"><i class="fa fa-envelope"></i> Applicants <!-- <span class="pull-right badge" ng-show="applicantCount" ng-bind="applicantCount"></span>--> </a></li>
+
+            <li class="sidebar-nav-item" ng-class="{active: isActive('events')}" id="side-events"><a href="/events"><i class="fa fa-calendar"></i> Events</a></li>
+            <li class="sidebar-nav-item" ng-class="{active: isActive('analytics')}" id="side-anal"><a href="/analytics"><i class="fa fa-tasks"></i> Analytics</a></li>
+            <li class="sidebar-nav-item" ng-class="{active: isActive('settings')}" id="side-settings"><a href="/settings"><i class="fa fa-cogs"></i> Settings</a></li>
+          </ul>
+        </div>
+
+        <div ng-class="{'col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main': !offerViewer, 'col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2': offerViewer}">
+            <div class="content" ng-view=""></div>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Google Analytics:-->
+     <script>
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-47122553-1');
+       ga('send', 'pageview');
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="bower_components/es5-shim/es5-shim.js"></script>
+    <script src="bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <script src="scripts/05e3ed41.vendor.js"></script>
+
+        <script src="scripts/8f20e49c.scripts.js"></script>
+</body>
+</html>

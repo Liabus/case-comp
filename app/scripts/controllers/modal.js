@@ -14,6 +14,13 @@ angular.module('caseCompApp')
             'jobs': Jobs
         };
 
+        $scope.startUploading = function() {
+          //console.log('uploading....')
+        };
+        $scope.uploadComplete = function (content) {
+          content = JSON.parse(content || '');
+        }
+
         var mode = ForcedData.mode || $location.path().split('/')[1];
         var data = slicer[mode];
 

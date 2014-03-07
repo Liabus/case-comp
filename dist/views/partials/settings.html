@@ -1,0 +1,65 @@
+<div id="jobs-top">
+    <h1>Settings</h1>
+</div>
+
+<tabset>
+  <tab heading="Recruiters">
+    <a href="/signup" class="btn-block btn-lg btn btn-default"><span class="fa fa-plus"></span> Add Recruiter</a>
+    <div class="m20t">
+      <div ng-repeat="user in users | orderBy: 'name'">
+        <div class="well"><b>{{user.name}}</b> ({{user.email}})</div>
+      </div>
+    </div>
+
+  </tab>
+  <tab heading="User Settings">
+    <div class="row">
+
+      <div class="col-sm-6">
+        <h3 style="margin-top: 0px">Change Name</h3>
+        <form class="form" name="nameForm" ng-submit="changeName(nameForm)" novalidate="">
+
+
+
+          <div class="form-group">
+            <label>Name</label>
+
+            <input type="text" name="name" class="form-control" ng-model="user.newName" ng-minlength="1" required="" mongoose-error="">
+          </div>
+
+          <p class="help-block"> {{ Nmessage }} </p>
+
+          <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+        </form>
+      </div>
+
+      <div class="col-sm-6">
+        <h3 style="margin-top: 0px">Change Password</h3>
+        <form class="form" name="form" ng-submit="changePassword(form)" novalidate="">
+
+          <div class="form-group">
+            <label>Current Password</label>
+
+            <input type="password" name="password" class="form-control" ng-model="user.oldPassword" mongoose-error="">
+            <p class="help-block" ng-show="form.password.$error.mongoose">
+                {{ errors.other }}
+            </p>
+          </div>
+
+          <div class="form-group">
+            <label>New Password</label>
+
+            <input type="password" name="newPassword" class="form-control" ng-model="user.newPassword" ng-minlength="3" required="">
+            <p class="help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+              Password must be at least 3 characters.
+            </p>
+          </div>
+
+          <p class="help-block"> {{ message }} </p>
+
+          <button class="btn btn-lg btn-primary" type="submit">Save changes</button>
+        </form>
+      </div>
+    </div>
+  </tab>
+</tabset>

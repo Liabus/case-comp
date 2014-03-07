@@ -49,6 +49,22 @@
             <input type="text" class="form-control mask-decimal" ui-mask="9?.99" ng-model="model.GPA">
         </div>
 
+        <div class="well">
+          <h4 style="margin-top: 0px;">Social Media</h4>
+          <div class="form-group">
+              <label>LinkedIn Username</label>
+              <input type="text" class="form-control" ng-model="model.linkedinLink" />
+          </div>
+          <div class="form-group">
+              <label>Github Username</label>
+              <input type="text" class="form-control" ng-model="model.githubLink" />
+          </div>
+          <div class="form-group">
+              <label>Twitter Username</label>
+              <input type="text" class="form-control" ng-model="model.twitterLink" />
+          </div>
+        </div>
+
         <div class="form-group">
             <label>Experience</label>
             <textarea class="form-control" ng-model="model.experience"></textarea>
@@ -64,6 +80,17 @@
             <textarea class="form-control" ng-model="model.skills"></textarea>
         </div>
     </form>
+    <div class="form-group">
+        <label>Resume Upload</label>
+        <form action="/api/candidates/resume" ng-upload="uploadComplete(content)" ng-upload-loading="startUploading()">
+          <div class="input-group">
+            <input type="file" id="resume" name="resume" class="form-control"></input>
+            <span class="input-group-btn">
+              <input type="submit" value="Upload Resume" class="btn btn-default" ng-disabled="$isLoading"></input>
+            </span>
+          </div>
+       </form>
+    </div>
 </div>
 <div class="modal-footer">
     <button class="btn btn-default" ng-click="cancel()">Cancel</button>
