@@ -7,7 +7,7 @@ angular.module('caseCompApp')
 
     $scope.register = function(form) {
       $scope.submitted = true;
-  
+
       if(form.$valid) {
         Auth.createUser({
           name: $scope.user.name,
@@ -16,7 +16,7 @@ angular.module('caseCompApp')
         })
         .then( function() {
           // Account created, redirect to home
-          $location.path('/');
+          $location.path('/settings');
         })
         .catch( function(err) {
           err = err.data;

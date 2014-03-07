@@ -11,7 +11,7 @@ angular.module('caseCompApp')
 
     //Direct to a page:
     if($routeParams.page){
-      //TODO
+      $scope.userSettingsActive = true;
     }
 
     $scope.users = [];
@@ -40,7 +40,7 @@ angular.module('caseCompApp')
       $scope.Nsubmitted = true;
 
       var nname = $scope.user.newName;
-      
+
       if(form.$valid) {
         Auth.changeName(nname)
         .then( function() {

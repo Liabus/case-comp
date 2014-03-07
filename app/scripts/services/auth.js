@@ -60,7 +60,6 @@ angular.module('caseCompApp')
 
         return User.save(user,
           function(user) {
-            $rootScope.currentUser = user;
             return cb(user);
           },
           function(err) {
