@@ -150,7 +150,7 @@
 <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
        <div>
 
-           <a ng-click="addToJob()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Job </a>
+           <a ng-click="addToJob()" href="/jobs" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Job </a>
 
             <div class="row">
                 <div ng-repeat="job in um.jobs | orderBy: ['-statusInt', '-job.name']" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
@@ -168,7 +168,7 @@
 <!-- <button class="pull-right btn btn-primary"><span class="fa fa-plus"></span> Add Interview</button> -->
        <div>
 
-           <a ng-click="addToEvent()" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Event </a>
+           <a ng-click="addToEvent()" href="/events" class="btn btn-block btn-lg btn-default" style="margin-bottom: 20px;"> <span class="fa fa-plus"></span> Add To Event </a>
 
            <div class="row">
                <div ng-repeat="evt in um.events | orderBy: '-name'" class="col-xs-12 col-sm-6 col-md-4 col-xl-3 basic-tile-list">
