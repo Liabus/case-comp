@@ -1,1 +1,30 @@
-ADDCJ
+<div class="modal-header">
+    <button type="button" class="close pull-right" ng-click="cancel()" aria-hidden="true">&times;</button>
+    <h3>{{label()}}</h3>
+</div>
+<div class="modal-body">
+    <form class="form" name="form" ng-submit="add()">
+
+        <div class="form-group">
+            <label>Job</label>
+            <input ng-disabled="edit" ui-select2="queryJobOptions" type="hidden" class="select2-selector" ng-model="model.job" required>
+        </div>
+
+        <div class="form-group">
+            <label>Status</label>
+            <select ui-select2="{}" ng-model="model.status" class="select2-selector">
+                <option value="Pending">Pending</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Rejected">Rejected</option>
+                <option value="Offered">Offered</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Declined">Declined</option>
+                <option value="Other">Other</option>
+            </select>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button class="btn btn-default" ng-click="cancel()">Cancel</button>
+    <button class="btn btn-primary" ng-click="add()" ng-disabled="form.$invalid">{{label()}}</button>
+</div>

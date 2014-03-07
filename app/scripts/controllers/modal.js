@@ -263,4 +263,39 @@ angular.module('caseCompApp')
             }
         };
 
+        $scope.queryJobOptions = {
+            multiple: ForcedData.usersMultiple || false,
+            ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
+                url: '/api/jobs/search',
+                data: function (term) {
+                    return {
+                        q: term // search term
+                    };
+                },
+                results: function (data) { // parse the results into the format expected by Select2.
+                    // since we are using custom formatting functions we do not need to alter remote JSON data
+                    _.each(data.jobs, function(job){
+                      job.id = job._id;
+                    });
+                    return {results: data.jobs};
+                }
+            },
+            formatResult: function(can) {
+                var markup = "<div class='candidate-search-result'>";
+
+                markup += '<strong>' + can.name + '</strong><br />';
+                markup += '<span>' + can.location + '</span>';
+                markup += '<span>' + can.status + '</span>';
+                markup += '<span>' + can.type + '</span>';
+
+                markup += "</div>";
+                return markup;
+            },
+            dropdownCssClass: "bigdrop",
+            escapeMarkup: function(m) { return m; },
+            formatSelection: function(can) {
+                return can.name;
+            }
+        };
+
     });

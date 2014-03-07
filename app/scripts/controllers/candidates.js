@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('caseCompApp')
-  .controller('candidatesController', function ($scope, Candidates, Applicants, $location, $routeParams, $modal) {
+  .controller('candidatesController', function ($scope, Candidates, Applicants, Jobs, $location, $routeParams, $modal) {
       $scope.edit = false;
       $scope.candidates = [];
       $scope.um = {};
@@ -28,13 +28,47 @@ angular.module('caseCompApp')
           $scope.edit = true;
       }
 
+      $scope.addToJob = function(){
+        NProgress.start();
+
+        var modalInstance = $modal.open({
+            templateUrl: 'partials/addCandidateJob.html',
+            controller: 'ModalController',
+            resolve: {
+                'ForcedData': function(){
+                    return {
+                      title: 'Job to Candidate',
+                      mode: 'JC',
+                      noedit: true,
+                      edit: false,
+                      defaultData: {
+                        status: 'Pending'
+                      },
+                      upload: function(model, callback){
+                        var modelClone = _.cloneDeep(model);
+                        modelClone.candidate = $scope.um._id;
+                        modelClone.job = model.job._id;
+                        Jobs.applicant(modelClone, function(a, b){
+                          callback();
+                        });
+                      }
+                    };
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+          updateData();
+        }, function () {
+            //console.log('Modal dismissed at: ' + new Date());
+        });
+      };
+
       var updateData = function(){
           NProgress.start();
           if($scope.edit){
               dataSet.get({id: $routeParams.id}, function(res){
                   NProgress.done();
-
-                  console.log(res);
 
                   if(res.applicant && !$scope.applicants){
                     $location.path('/applicants/view/' + res._id);
