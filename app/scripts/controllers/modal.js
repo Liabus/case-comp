@@ -19,6 +19,9 @@ angular.module('caseCompApp')
         };
         $scope.uploadComplete = function (content) {
           content = JSON.parse(content || '');
+          if(content.url){
+            $scope.model.resumeUrl = content.url;
+          }
         }
 
         var mode = ForcedData.mode || $location.path().split('/')[1];
